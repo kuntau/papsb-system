@@ -1,0 +1,139 @@
+/* shades of gray
+
+#2B292A
+
+*/
+
+body {
+  background: #fefefe;
+}
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.sidebar-hidden {
+  padding-left: 250px;
+}
+
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 90%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #000;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.sidebar-hidden #sidebar-wrapper {
+  width: 250px;
+  /* visibility: hidden; */
+}
+
+#content-wrapper {
+  /* margin-left: 250px; */
+  /* position: absolute; */
+  width: 100%;
+  /* padding: 15px; */
+  /* margin-left: 250px; */
+  /* height: 100vh; */
+  /* -webkit-transition: all 0.5s ease; */
+  /* transition: all 0.5s ease; */
+  /* background: #fff; */
+}
+
+#wrapper.sidebar-hidden #content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+/* navbar style */
+.navbar-default .navbar-header > a {
+  color: #333;
+  font-weight: bold;
+}
+
+.navbar-default .navbar-navicon {
+  padding-right: 0;
+}
+.navbar-default {
+  background: yellow;
+  -webkit-box-shadow: #aaa 0 3px 5px;
+  box-shadow: #aaa 0 3px 1em;
+  margin-bottom: 0;
+}
+.navbar-default .navbar-nav li > a {
+  color: #333;
+}
+.navbar-default ul.navbar-right:last-child {
+  margin-right: 0;
+}
+
+/* sidebar style */
+.sidebar-nav {
+  width: 250px;
+  margin: 0;
+  padding: 0;
+}
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999;
+}
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+/* color! */
+.blue {
+  color: blue;
+}
+
+.green {
+  color: green;
+}
+
+.nav a {
+  cursor: pointer;
+}
+
+a .fa {
+  margin-right: 5px;
+}
+
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 250px;
+  }
+  #wrapper.sidebar-hidden {
+    padding-left: 0;
+  }
+  #sidebar-wrapper {
+    width: 250px;
+  }
+  #wrapper.sidebar-hidden #sidebar-wrapper {
+    width: 0;
+  }
+  #content-wrapper {
+    padding: 20px;
+  }
+  #wrapper.sidebar-hidden #content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}

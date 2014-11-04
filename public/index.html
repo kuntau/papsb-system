@@ -1,0 +1,77 @@
+<!--index.html-->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="kuntauApp">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Node/Angular SPA Simple todo</title>
+
+  <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    /*html                { overflow-y: scroll; }*/
+    /*body                { padding-top: 50px; }*/
+  </style>
+
+  <script>
+    document.write('<base href="' + document.location + '" />');
+  </script>
+
+</head>
+<body>
+
+  <!-- header and navbar -->
+  <header>
+    <nav class="navbar navbar-default">
+      <!-- <div class="container"> -->
+        <div class="navbar-header">
+          <a class="navbar-brand navbar-navicon"><i class="fa fa-navicon fa-lg"></i></a>
+          <a ui-sref="home" class="navbar-brand">PAPSB PORTAL</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+          <li><a ui-sref="home"><i class="fa fa-home"></i>Home</a></li>
+          <li><a ui-sref="about"><i class="fa fa-shield"></i>About</a></li>
+          <li><a ui-sref="contact"><i class="fa fa-comment"></i>Contact</a></li>
+          <li><a ng-href="#/sidebar" ng-click="sidebar = !sidebar">
+              <i class="fa fa-thumbs-o-up"></i>Sidebar</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a ng-href="#/auth" app-login="login"><i class="fa fa-sign-in"></i>Sign In</a></li>
+          <li><a ng-href="#/sidebar" ng-click="sidebar = !sidebar">
+              <i class="fa fa-thumbs-o-up"></i>Sidebar</a></li>
+        </ul>
+        <!-- </div> -->
+    </nav>
+  </header>
+
+  <!-- main content and injected views -->
+  <div id="wrapper" class="wrapper" ng-class="sidebar ? 'sidebar-hidden' : '' ">
+
+    <!-- angular templating -->
+    <section class="main-ui-view" ui-view ng-controller="mainController"></section>
+
+  </div>
+
+  <!-- footer -->
+  <footer class="text-center">
+    Find me on <a href="http://kuntau.org">kuntau.org</a>
+  </footer>
+
+  <!-- <ng&#45;include src="'views/login.html'"></ng&#45;include> -->
+
+  <script src="libs/angular/angular.min.js"></script>
+  <script src="libs/angular-animate/angular-animate.min.js"></script>
+  <script src="libs/jquery/dist/jquery.min.js"></script>
+  <script src="libs/angular-ui-bootstrap-bower/ui-bootstrap.min.js"></script>
+  <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="libs/angular-animate/angular-animate.min.js"></script>
+  <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="js/app.js"></script>
+  <!--<script src="js/controllers/mainCtrl.js"></script>-->
+  <!-- <script src="js/controllers/loginCtrl.js"></script> -->
+</body>
+</html>
