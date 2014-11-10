@@ -21,7 +21,7 @@
     mongoose.connect(database.url);
 
     // passport config
-    require('./config/passport')(passport);
+    require('./config/passport')(passport)
 
     // express setup
     app.use(express.static(__dirname + '/public'));
@@ -32,7 +32,7 @@
 
     // passport middleware setup
     app.use(cookieParser())
-    app.use(session({ secret: 'papsbportalsecret',
+    app.use(session({ secret: 'papsbworkshopsecret',
                       resave: true,
                       saveUninitialized: true }));
     app.use(passport.initialize());
@@ -49,4 +49,7 @@
 // run the server
 // ======================================
     app.listen(port);
-    console.log('app listening on http://localhost:3000/');
+    console.log('app listening on http://localhost:' + port + '/');
+    console.log('env = ' + app.get('env') +
+        '\n__dirname = ' + __dirname +
+        '\nprocess.cwd = ' + process.cwd());

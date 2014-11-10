@@ -1,0 +1,19 @@
+<!--<div data-ng-controller="Shell as shell">-->
+  <header>
+    <div data-ng-include="'views/navbar.html'"></div>
+  </header>
+  <section id="content" class="content">
+
+    <!-- main content and injected views -->
+    <div id="wrapper" class="wrapper" ng-class="sidebar ? 'sidebar-hidden' : '' ">
+
+      <!-- angular templating -->
+      <div data-ui-view></div>
+
+    </div>
+
+  </section>
+  <footer>
+    <div data-ng-include="'views/footer.html'"></div>
+  </footer>
+<!--</div>-->

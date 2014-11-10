@@ -21,6 +21,8 @@
     "angular-ui-router": "^0.x",
     "angular-ui-bootstrap-bower": "^0.x",
     "bootstrap": "^3.x",
-    "font-awesome": "^4.x"
+    "font-awesome": "^4.x",
+    "angular-toastr": "~0.5.1",
+    "Faker": "~2.0.0"
   }
 }

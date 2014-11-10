@@ -1,28 +1,30 @@
 {
-  "name": "node-spa-simple-todo",
+  "name": "papsb-workshop",
   "version": "0.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "gulp"
   },
   "author": "kuntau",
   "license": "ISC",
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.0.2",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.1.0",
-    "express": "^4.1.1",
-    "express-session": "^1.2.0",
-    "method-override": "^1.0.0",
-    "mongoose": "^3.8.8",
-    "morgan": "^1.0.1",
-    "passport": "^0.2.0",
-    "passport-local": "^1.0.0"
+    "bcrypt-nodejs": "0.x",
+    "body-parser": "^1.x",
+    "connect-flash": "^0.x",
+    "cookie-parser": "^1.x",
+    "express": "^4.x",
+    "express-session": "^1.x",
+    "method-override": "^1.x",
+    "mongoose": "^3.x",
+    "morgan": "^1.x",
+    "passport": "^0.x",
+    "passport-local": "^1.x"
   },
   "devDependencies": {
-    "gulp-nodemon": "^1.0.4"
+    "gulp": "^3.x",
+    "gulp-livereload": "^2.x",
+    "gulp-nodemon": "^1.x"
   }
 }
