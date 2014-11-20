@@ -14,7 +14,7 @@ function papsbInit ($rootScope, $state, $stateParams) {
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-  //$locationProvider.html5Mode(true);
+  $locationProvider.html5Mode(true);
   $locationProvider.hashPrefix('!');
   // for any unmatched url, redirect here
   $urlRouterProvider.otherwise('/dashboard');

@@ -17,13 +17,13 @@
     }
   </style>
 
-  <!--<script>-->
-    <!--document.write('<base href="' + document.location + '" />');-->
-  <!--</script>-->
+  <script>
+//    document.write('<base href="' + document.location + '" />');
+  </script>
+  <base href="/"></base>
 
 </head>
 <body>
-
 
   <!-- it is important to remember all template's path need to be double quoted-->
   <ng-include src="'views/shell.html'"></ng-include>
@@ -38,11 +38,6 @@
   <script src="libs/angular-toastr/dist/angular-toastr.min.js"></script>
   <!-- vendors:end -->
 
-  <!-- vendors-dev:start -->
-  <script src="libs/Faker/build/build/faker.min.js"></script>
-  <script src="http://192.168.1.111:35729/livereload.js?snipver=1"></script>
-  <!-- vendors-dev:end -->
-
   <!-- bootstrap:start-->
   <script src="js/app.js"></script>
   <script src="js/app.route.js"></script>
@@ -50,5 +45,12 @@
 
   <!--<script src="js/controllers/mainCtrl.js"></script>-->
   <!-- <script src="js/controllers/loginCtrl.js"></script> -->
+
+  <!-- dev:start -->
+  <script src="libs/Faker/build/build/faker.min.js"></script>
+  <!-- <script src="http://192.168.0.111:35729/livereload.js?snipver=1"></script> -->
+  <script src="http://192.168.0.100:35729/livereload.js?snipver=1"></script>
+  <!-- <script src="http://kosx.duckdns.org:35729/livereload.js?snipver=1"></script> -->
+  <!-- dev:end -->
 </body>
 </html>

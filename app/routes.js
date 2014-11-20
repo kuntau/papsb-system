@@ -2,7 +2,17 @@
 
 var Todo = require('./models/todo');
 
-module.exports = function(app) {
+module.exports = function(app, express) {
+
+  // main static folders
+  var root = __dirname + '/..';
+
+  app.use('/js', express.static(root + '/js'));
+  app.use('/css', express.static(root + '/css'));
+  app.use('/libs', express.static(root + '/libs'));
+  app.use('/views', express.static(root + '/views'));
+  app.use('/img', express.static(root + '/img'));
+
   // api -------------
   // get all todos
   app.get('/api/todos', function(req, res) {
@@ -57,7 +67,7 @@ module.exports = function(app) {
   });
 
   app.get('*', function(req, res) {
-    res.sendfile('./public/index.html');
+    res.sendFile('./public/index.html', { root: __dirname + '/..' });
   });
 
 };

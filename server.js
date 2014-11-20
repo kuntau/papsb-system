@@ -6,7 +6,6 @@
     var app            = express();
     var mongoose       = require('mongoose');
     var passport       = require('passport');
-    var flash          = require('connect-flash');
     var port           = process.env.PORT || 3000;
 
     // new express 4 middleware
@@ -37,13 +36,12 @@
                       saveUninitialized: true }));
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(flash());
 
 // ======================================
 // routes
 // ======================================
 
-    require('./app/routes')(app, passport);
+    require('./app/routes')(app, express, passport);
 
 // ======================================
 // run the server
