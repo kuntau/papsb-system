@@ -4,7 +4,8 @@ var gulp       = require('gulp'),
     nodemon    = require('gulp-nodemon'),
     stylus     = require('gulp-stylus'),
     concat     = require('gulp-concat'),
-    filter     = require('gulp-filter');
+    filter     = require('gulp-filter'),
+    nib        = require('nib');
 
 gulp.task('default', function() {
   var watcher = gulp.watch('public/**', ['css', 'reload']);
@@ -28,7 +29,10 @@ gulp.task('css', function () {
     './public/css/styles/*.styl'
   ])
     .pipe(stylusFiler)
-    .pipe(stylus())
+    .pipe(stylus({
+       use: nib(),
+       compress: true
+     }))
     .pipe(concat('style.css'))
     .pipe(gulp.dest('./public/css'));
 });
