@@ -1,5 +1,5 @@
 {
-  "name": "node-spa-simple-todo",
+  "name": "papsb-system",
   "version": "0.0.0",
   "authors": [
     "Kuntau <kuntau17@gmail.com>"
@@ -22,7 +22,7 @@
     "angular-ui-bootstrap-bower": "^0.x",
     "bootstrap": "^3.x",
     "font-awesome": "^4.x",
-    "angular-toastr": "~0.5.1",
-    "Faker": "~2.0.0"
+    "angular-toastr": "^0.x",
+    "Faker": "^2.x"
   }
 }
