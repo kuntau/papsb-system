@@ -17,30 +17,30 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
   $locationProvider.hashPrefix('!');
   // for any unmatched url, redirect here
-  $urlRouterProvider.otherwise('/dashboard');
+  $urlRouterProvider.otherwise('/workshop');
 
   $stateProvider
 
-    // route for the dashboard page
-    .state('dashboard', {
-      url         : '/dashboard',
-      templateUrl : 'views/dashboard.html',
+    // route for the workshop page
+    .state('workshop', {
+      url         : '/workshop',
+      templateUrl : 'views/workshop.html',
       title       : 'Workshop Dashboard'
     })
 
-    //.state('dashboard.index', {
+    //.state('workshop.index', {
     //  url         : '/index',
-    //  templateUrl : 'views/dashboard.html'
+    //  templateUrl : 'views/workshop.html'
     //})
 
-    .state('dashboard.message1', {
+    .state('workshop.message1', {
       url         : '/message1',
-      templateUrl : 'views/dashboard.message1.html'
+      templateUrl : 'views/workshop.message1.html'
     })
 
-    .state('dashboard.message2', {
+    .state('workshop.message2', {
       url         : '/message2',
-      templateUrl : 'views/dashboard.message2.html',
+      templateUrl : 'views/workshop.message2.html',
       controller  : function ($scope, toastr) {
         toastr.info('This is the info from toastr');
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
