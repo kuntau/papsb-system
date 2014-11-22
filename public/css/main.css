@@ -52,46 +52,6 @@ body {
   margin-right: -250px;
 }
 
-/* navbar style */
-.navbar-default .navbar-header > a {
-  color: #333;
-  font-weight: bold;
-}
-
-.navbar-default .navbar-navicon {
-  padding-right: 0;
-}
-.navbar-default {
-  background: yellow;
-  -webkit-box-shadow: #aaa 0 3px 5px;
-  box-shadow: #aaa 0 3px 1em;
-  margin-bottom: 0;
-}
-.navbar-default .navbar-nav li > a {
-  background-color: yellow;
-  color: #333;
-}
-
-.navbar-default .navbar-nav li > a:hover {
-  color: #000;
-}
-
-.navbar-default .navbar-nav li.active > a,
-.navbar-default .navbar-nav li.active > a:hover,
-.navbar-default .navbar-nav li.active > a:focus {
-  background-color: gold;
-  color: #333;
-}
-
-.navbar-default .navbar-nav li.active > a:hover {
-  background-color: gold;
-  color: #333;
-}
-
-.navbar-default ul.navbar-right:last-child {
-  margin-right: 0;
-}
-
 /* sidebar style */
 .sidebar-nav {
   width: 250px;
