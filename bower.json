@@ -23,6 +23,7 @@
     "bootstrap": "^3.x",
     "font-awesome": "^4.x",
     "angular-toastr": "^0.x",
-    "Faker": "^2.x"
+    "Faker": "^2.x",
+    "spin.js": "^2.x"
   }
 }

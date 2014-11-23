@@ -31,7 +31,7 @@ gulp.task('css', function () {
     .pipe(stylusFiler)
     .pipe(stylus({
        use: nib(),
-       compress: true
+       compress: false
      }))
     .pipe(concat('style.css'))
     .pipe(gulp.dest('./public/css'));

@@ -10,7 +10,7 @@ app.controller('mainController', ['$scope', function($scope) {
 
   // create a message to display in our view
   $scope.message = 'Everyone come and see how good id look';
-  $scope.sidebar = true;
+  $scope.sidebar = false;
 }]);
 
 app.controller('aboutController', function ($scope) {
