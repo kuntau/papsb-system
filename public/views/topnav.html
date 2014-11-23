@@ -3,14 +3,14 @@
     <a ui-sref="workshop" class="navbar-brand"><i class="fa fa-home fa-lg"></i> papsb internal</a>
   </div>
 
+  <ul class="nav navbar-nav navbar-right">
+    <li ng-show="shell.workshopStatus"><a ng-click="shell.sidebarToggle()"><i class="fa fa-adn"></i>sidebar
+      <span class="badge">{{shell.sidebarStatus ? 'OFF' : 'ON'}}</span></a></li>
+    <li><a href="#" app-login="login"><i class="fa fa-sign-in"></i>Sign In</a></li>
+  </ul>
   <ul class="nav navbar-nav">
     <li ui-sref-active="active"><a ui-sref="workshop"><i class="fa fa-wrench"></i>WORKSHOP</a></li>
     <li ui-sref-active="active"><a ui-sref="about"><i class="fa fa-info"></i>ABOUT</a></li>
     <li ui-sref-active="active"><a ui-sref="contact"><i class="fa fa-comment"></i>CONTACT</a></li>
-  </ul>
-  <ul class="nav navbar-nav navbar-right">
-    <li><a ng-click="shell.sidebarToggle()"><i class="fa fa-adn"></i>sidebar
-      <span class="badge">{{shell.sidebarStatus ? 'OFF' : 'ON'}}</span></a></li>
-    <li><a href="#" app-login="login"><i class="fa fa-sign-in"></i>Sign In</a></li>
   </ul>
 </nav>
