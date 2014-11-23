@@ -24,9 +24,11 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       title       : 'Workshop Dashboard',
       onEnter     : function () {
         vm.sidebarStatus = '';
+        vm.workshopStatus = true;
       },
       onExit     : function () {
         vm.sidebarStatus = 'sidebar-hidden';
+        vm.workshopStatus = false;
       }
     })
 

@@ -23,6 +23,7 @@
   font-family $font-gotham
   font-weight 700
   font-size 16px
+  color $topnavbrandcolor
 
 .navbar-default .navbar-nav li > a:hover,
 .navbar-default .navbar-nav li.active > a
@@ -35,7 +36,10 @@
   color $topnavcolor
   background-color $topnavbgcolor
 
-.navbar-default ul.navbar-right:last-child
+.navbar-default .navbar-header a
+  color $topnavbrandcolor
+
+.navbar-default .nav.navbar-nav.navbar-right
   margin-right 0
 
 .navbar-nav a .fa

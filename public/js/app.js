@@ -12,6 +12,7 @@ angular.module('papsb', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'toastr'])
   // create a message to display in our view
   vm.message = 'Everyone come and see how good id look';
   vm.sidebarStatus = 'sidebar-hidden';
+  vm.workshopStatus = false;
 
   vm.sidebarToggle = function () {
     if (vm.sidebarStatus) {
