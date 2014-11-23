@@ -7,16 +7,14 @@ var gulp       = require('gulp'),
     filter     = require('gulp-filter'),
     nib        = require('nib');
 
-gulp.task('default', function() {
-  var watcher = gulp.watch('public/**', ['css', 'reload']);
+gulp.task('default', ['css'], function() {
+  var watcher = gulp.watch(['public/**', '!public/css/style.css'], ['reload']);
 
   nodemon({ script: 'server.js',
             ext: 'js',
             env: { 'NODE_ENV': 'development' },
             ignore: ['./public/**']});
-  // gulp.run('watch');
   livereload.listen();
-  //gulp.watch('public/**').on('change', livereload.changed);
   watcher.on('change', function (event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running task...');
   });
@@ -37,8 +35,10 @@ gulp.task('css', function () {
     .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('reload', function () {
+gulp.task('reload', ['css'], function () {
+  //setTimeout(function () {
   livereload.changed();
+  //}, 500)
 })
 
 gulp.task('watch', function() {

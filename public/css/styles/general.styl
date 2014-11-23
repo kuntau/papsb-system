@@ -12,8 +12,9 @@ body
   font-family $font-proxima
   font-weight normal
 
-h1, h2, h3, h4, h5
+h1, h2, h3, h4, h5, h6
   font-family $font-gotham
+  text-transform uppercase
 
 #wrapper
   padding-left 0
@@ -25,6 +26,7 @@ h1, h2, h3, h4, h5
 
 #content-wrapper
   width 100%
+  -webkit-transform translate3d(0, 0, 0) //hacky way to force chrome redraw
 
 /* color! */
 .blue

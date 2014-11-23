@@ -13,19 +13,23 @@ function papsbInit ($rootScope, $state, $stateParams) {
 }
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
-
-  $locationProvider.html5Mode(true);
-  $locationProvider.hashPrefix('!');
-  // for any unmatched url, redirect here
-  $urlRouterProvider.otherwise('/workshop');
+  $locationProvider.html5Mode(true).hashPrefix('!');
+  $urlRouterProvider.otherwise('/workshop'); // for any unmatched url, redirect here
 
   $stateProvider
-
     // route for the workshop page
     .state('workshop', {
       url         : '/workshop',
       templateUrl : 'views/workshop.html',
-      title       : 'Workshop Dashboard'
+      title       : 'Workshop Dashboard',
+      onEnter     : function () {
+        vm.sidebarStatus = '';
+        vm.workshopStatus = true;
+      },
+      onExit     : function () {
+        vm.sidebarStatus = 'sidebar-hidden';
+        vm.workshopStatus = false;
+      }
     })
 
     //.state('workshop.index', {
