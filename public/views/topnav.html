@@ -1,8 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-  <!-- <div class="container"> -->
   <div class="navbar-header">
-    <!--<a class="navbar-brand navbar-navicon"><i class="fa fa-apple fa-lg"></i></a>-->
-    <!--<a ui-sref="dashboard" class="navbar-brand">papsb internal</a>-->
     <a ui-sref="workshop" class="navbar-brand"><i class="fa fa-home fa-lg"></i> papsb internal</a>
   </div>
 
@@ -12,7 +9,8 @@
     <li ui-sref-active="active"><a ui-sref="contact"><i class="fa fa-comment"></i>CONTACT</a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
-    <li><a ng-href="#/auth" app-login="login"><i class="fa fa-sign-in"></i>Sign In</a></li>
+    <li><a ng-click="shell.sidebarToggle()"><i class="fa fa-adn"></i>sidebar
+      <span class="badge">{{shell.sidebarStatus ? 'OFF' : 'ON'}}</span></a></li>
+    <li><a href="#" app-login="login"><i class="fa fa-sign-in"></i>Sign In</a></li>
   </ul>
-  <!-- </div> -->
 </nav>

@@ -1,8 +1,8 @@
-<!--<div data-ng-controller="Shell as shell">-->
+<div data-ng-controller="ShellCtrl as shell">
   <header>
     <div data-ng-include="'views/topnav.html'"></div>
   </header>
-  <section id="wrapper" class="wrapper">
+  <section id="wrapper" class="wrapper sidebar-hidden" ng-class="shell.sidebarStatus">
 
       <!-- angular-ui templating -->
       <div data-ui-view>
@@ -13,4 +13,4 @@
   <footer>
     <div data-ng-include="'views/footer.html'"></div>
   </footer>
-<!--</div>-->
+</div>
