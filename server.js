@@ -30,7 +30,7 @@
     app.use(methodOverride());
 
     // passport middleware setup
-    app.use(cookieParser())
+    app.use(cookieParser());
     app.use(session({ secret: 'papsbworkshopsecret',
                       resave: true,
                       saveUninitialized: true }));
@@ -41,7 +41,7 @@
 // routes
 // ======================================
 
-    require('./app/routes')(app, express, passport);
+    require('./app/routes')(app, passport);
 
 // ======================================
 // run the server

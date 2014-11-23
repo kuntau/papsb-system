@@ -13,7 +13,7 @@ gulp.task('default', ['css'], function() {
   nodemon({ script: 'server.js',
             ext: 'js',
             env: { 'NODE_ENV': 'development' },
-            ignore: ['./public/**']});
+            ignore: ['.git/**','.idea/**','./public/**']});
   livereload.listen();
   watcher.on('change', function (event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running task...');

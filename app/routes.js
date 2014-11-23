@@ -2,8 +2,9 @@
 
 var Todo = require('./models/todo');
 
-module.exports = function(app, express) {
+module.exports = function(app, passport) {
 
+  /*
   // main static folders
   var root = __dirname + '/..';
 
@@ -12,6 +13,7 @@ module.exports = function(app, express) {
   app.use('/libs', express.static(root + '/libs'));
   app.use('/views', express.static(root + '/views'));
   app.use('/img', express.static(root + '/img'));
+  */
 
   // api -------------
   // get all todos

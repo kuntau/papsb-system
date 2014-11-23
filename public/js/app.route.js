@@ -39,15 +39,21 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     .state('workshop.message1', {
       url         : '/message1',
-      templateUrl : 'views/workshop.message1.html'
+      templateUrl : 'views/workshop.message1.html',
+      title       : 'Message 1',
+      controller  : function ($scope, toastr) {
+        $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
+        toastr.success('The message from message 1: ' + $scope.names[2]);
+      }
     })
 
     .state('workshop.message2', {
       url         : '/message2',
       templateUrl : 'views/workshop.message2.html',
+      title       : 'Message 2',
       controller  : function ($scope, toastr) {
-        toastr.info('This is the info from toastr');
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
+        toastr.info('The message from message 2: ' + $scope.names[0]);
       }
     })
 
