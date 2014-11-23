@@ -24,4 +24,44 @@
   text-decoration none
   background rgba(235, 235, 235, 0.2)
 
+#sidebar-wrapper
+  z-index 1000
+  position fixed
+  left 250px
+  width 0
+  height 90%
+  margin-left -250px
+  overflow-y auto
+  background #000
+  -webkit-transition all 0.5s ease
+  transition all 0.5s ease
 
+#wrapper.sidebar-hidden #sidebar-wrapper
+  width 250px
+  /* visibility hidden */
+
+#wrapper.sidebar-hidden #content-wrapper
+  position absolute
+  margin-right -250px
+
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 250px;
+  }
+  #wrapper.sidebar-hidden {
+    padding-left: 0;
+  }
+  #sidebar-wrapper {
+    width: 250px;
+  }
+  #wrapper.sidebar-hidden #sidebar-wrapper {
+    width: 0;
+  }
+  #content-wrapper {
+    padding: 20px;
+  }
+  #wrapper.sidebar-hidden #content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
