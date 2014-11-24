@@ -2,6 +2,14 @@
 
 var Todo = require('./models/todo');
 
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated())
+    return next();
+
+  //res.redirect('/login');
+  res.sendStatus('401');
+}
+
 module.exports = function(app, passport) {
 
   /*
@@ -68,7 +76,11 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('*', function(req, res) {
+  app.get('/login', function (req, res) {
+    res.sendStatus(404);
+  });
+
+  app.get('/*', isLoggedIn, function(req, res) {
     res.sendFile('./public/index.html', { root: __dirname + '/..' });
   });
 
