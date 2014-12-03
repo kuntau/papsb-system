@@ -20,8 +20,8 @@ function papsbInit ($rootScope, $state, $stateParams) {
 }
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
-  $locationProvider.html5Mode(true).hashPrefix('!');
-  $urlRouterProvider.otherwise('/login'); // for any unmatched url, redirect here
+  // $locationProvider.html5Mode(true).hashPrefix('!');
+  $urlRouterProvider.otherwise('/workshop'); // for any unmatched url, redirect here
 
   $stateProvider
     // route for the workshop page
@@ -32,6 +32,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       onEnter     : function () {
         shell.sidebarStatus = '';
         shell.workshopStatus = true;
+        shell.message = 'HIJAcked!! 1337';
       },
       onExit     : function () {
         shell.sidebarStatus = 'sidebar-hidden';
@@ -39,23 +40,36 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     })
 
-    //.state('workshop.index', {
-    //  url         : '/index',
-    //  templateUrl : 'views/workshop.html'
-    //})
-
     .state('workshop.message1', {
-      url         : '/message1',
+      url         : '/:page',
       templateUrl : 'views/workshop.message1.html',
       title       : 'Message 1',
-      controller  : function ($scope, toastr) {
+      controller  : function ($scope, $stateParams, toastr, getTitle) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
-        toastr.success('The message from message 1: ' + $scope.names[2]);
+        $scope.title = getTitle.title;
+        toastr.success($stateParams.page + ' The message from message 1: ' + $scope.names[2]);
+      },
+      resolve     : {
+        getTitle : function ($stateParams) {
+                    return { title: $stateParams.page }
+        }},
+      data        : {
+        titlex: 'haish'
       }
     })
 
+    // .state('workshop.message1', {
+    //   url         : '/message1',
+    //   templateUrl : 'views/workshop.message1.html',
+    //   title       : 'Message 1',
+    //   controller  : function ($scope, toastr) {
+    //     $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
+    //     toastr.success('The message from message 1: ' + $scope.names[2]);
+    //   }
+    // })
+    //
     .state('workshop.message2', {
-      url         : '/message2',
+      url         : '/aum/message2',
       templateUrl : 'views/workshop.message2.html',
       title       : 'Message 2',
       controller  : function ($scope, toastr) {
@@ -68,14 +82,14 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('about', {
       url         : '/about',
       templateUrl : 'views/about.html',
-      controller  : 'aboutController as vm',
+      controller  : 'AboutCtrl as vm',
       title       : 'About Us'
     })
 
     .state('contact', {
       url         : '/contact',
       templateUrl : 'views/contact.html',
-      controller  : 'contactController as vm',
+      controller  : 'ContactCtrl as vm',
       title       : 'Contact Us',
       resolve     : {
         delay: function ($q, $timeout) {
