@@ -10,11 +10,18 @@ angular.module('papsb')
 function papsbInit ($rootScope, $state, $stateParams) {
   $rootScope.$state = $state;
   $rootScope.$stateParams = $stateParams;
+  // monitor `state change`
+  $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+    //event.preventDefault();
+    //console.log(event + ' state is changing! fromState:' + fromState + ' toState:' + toParams);
+    //console.log(JSON.stringify(toState, null, 4));
+    console.log(toState.url);
+  })
 }
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
-  $urlRouterProvider.otherwise('/workshop'); // for any unmatched url, redirect here
+  $urlRouterProvider.otherwise('/login'); // for any unmatched url, redirect here
 
   $stateProvider
     // route for the workshop page
@@ -23,12 +30,12 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl : 'views/workshop.html',
       title       : 'Workshop Dashboard',
       onEnter     : function () {
-        vm.sidebarStatus = '';
-        vm.workshopStatus = true;
+        shell.sidebarStatus = '';
+        shell.workshopStatus = true;
       },
       onExit     : function () {
-        vm.sidebarStatus = 'sidebar-hidden';
-        vm.workshopStatus = false;
+        shell.sidebarStatus = 'sidebar-hidden';
+        shell.workshopStatus = false;
       }
     })
 
@@ -61,15 +68,22 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('about', {
       url         : '/about',
       templateUrl : 'views/about.html',
-      controller  : 'aboutController',
+      controller  : 'aboutController as vm',
       title       : 'About Us'
     })
 
     .state('contact', {
       url         : '/contact',
       templateUrl : 'views/contact.html',
-      controller  : 'contactController',
-      title       : 'Contact Us'
+      controller  : 'contactController as vm',
+      title       : 'Contact Us',
+      resolve     : {
+        delay: function ($q, $timeout) {
+          var delay = $q.defer();
+          $timeout(delay.resolve, 100);
+          return delay.promise;
+        }
+      }
     })
 
     .state('login', {

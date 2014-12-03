@@ -3,31 +3,31 @@
 // create the module and name it papsb
 angular.module('papsb', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'toastr'])
 
-// configure our routes
-
 // create the controller and inject Angular's $scope
   .controller('ShellCtrl', ['$scope', function() {
 
-  vm = this;
+  shell = this;
   // create a message to display in our view
-  vm.message = 'Everyone come and see how good id look';
-  vm.sidebarStatus = 'sidebar-hidden';
-  vm.workshopStatus = false;
+  shell.message = 'Everyone come and see how good id look';
+  shell.sidebarStatus = 'sidebar-hidden';
+  shell.workshopStatus = false;
 
-  vm.sidebarToggle = function () {
-    if (vm.sidebarStatus) {
-      vm.sidebarStatus = "";
-    } else { vm.sidebarStatus = 'sidebar-hidden' }
+  shell.sidebarToggle = function () {
+    if (shell.sidebarStatus) {
+      shell.sidebarStatus = "";
+    } else { shell.sidebarStatus = 'sidebar-hidden' }
   }
   }])
 
-  .controller('aboutController', function ($scope) {
-    $scope.message = 'This is about page!';
+  .controller('aboutController', function () {
+    vm = this;
+    vm.message = 'This is about page!';
+    //$scope.params = $stateParams;
   })
 
-  .controller('contactController', function ($scope) {
-    $scope.message = 'Contact us!!';
-  })
+  .controller('contactController', ['$scope', function ($scope) {
+    this.message = 'You now can contact us!!';
+  }])
 
   .directive('appLogin', function () {
     return {
