@@ -4,9 +4,10 @@
 angular
   .module('papsb', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'toastr'])
   .controller('ShellCtrl', ShellCtrl)
-  .controller('WorkshopCtrl', WorkshopCtrl)
+  .controller('WorkshopCtrl', ['UIService', WorkshopCtrl])
   .controller('AboutCtrl', AboutCtrl)
-  .controller('ContactCtrl', ContactCtrl);
+  .controller('ContactCtrl', ContactCtrl)
+  .factory('UIService', ['$rootScope', '$state', UIService]);
 
 function ShellCtrl() {
   shell = this;
@@ -22,7 +23,7 @@ function ShellCtrl() {
   }
 };
 
-function WorkshopCtrl($stateParams) {
+function WorkshopCtrl(UIService) {
   vm = this;
 }
 
@@ -36,7 +37,6 @@ function ContactCtrl($scope) {
   this.message = 'You now can contact us!!';
 };
 
-  // .factory('UIService', function() {
-  //   
-  // });
-
+function UIService($rootScope, $state) {
+  console.log("From: UIService");
+}

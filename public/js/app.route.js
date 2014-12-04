@@ -4,10 +4,10 @@
 
 // manage all routes in one file
 angular.module('papsb')
-  .run(['$rootScope', '$state', '$stateParams', papsbInit])
+  .run(['$rootScope', '$state', '$stateParams', 'toastr', papsbInit])
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', papsbRoute]);
 
-function papsbInit ($rootScope, $state, $stateParams) {
+function papsbInit ($rootScope, $state, $stateParams, toastr) {
   $rootScope.$state = $state;
   $rootScope.$stateParams = $stateParams;
   // monitor `state change`
@@ -15,7 +15,7 @@ function papsbInit ($rootScope, $state, $stateParams) {
     //event.preventDefault();
     //console.log(event + ' state is changing! fromState:' + fromState + ' toState:' + toParams);
     //console.log(JSON.stringify(toState, null, 4));
-    console.log(toState.url);
+    toastr.info(fromState.url + ' --> ' + toState.url + ': ' + toParams.page);
   })
 }
 
@@ -47,7 +47,8 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       controller  : function ($scope, $stateParams, toastr, getTitle) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
         $scope.title = getTitle.title;
-        toastr.success($stateParams.page + ' The message from message 1: ' + $scope.names[2]);
+        $scope.page = $stateParams.page;
+        // toastr.success('The message from message 1: ' + $scope.title);
       },
       resolve     : {
         getTitle : function ($stateParams) {
@@ -74,7 +75,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       title       : 'Message 2',
       controller  : function ($scope, toastr) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
-        toastr.info('The message from message 2: ' + $scope.names[0]);
+        // toastr.warning('The message from message 2: ' + $scope.names[0]);
       }
     })
 
