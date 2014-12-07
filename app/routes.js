@@ -10,9 +10,9 @@ function isLoggedIn(req, res, next) {
 
   console.log('routes.js --> user not logged in');
   // res.redirect(401, '/index.html');
-  //res.sendStatus('401');
-  res.sendFile('./public/index.html', { root: __dirname + '/..' });
-  // return next();
+  // res.sendStatus('401');
+  // res.sendFile('./public/index.html', { root: __dirname + '/..' });
+  return next();
 }
 
 module.exports = function(app, passport) {
@@ -74,7 +74,7 @@ module.exports = function(app, passport) {
     res.sendStatus(404);
   });
 
-  app.get('/*', isLoggedIn, function(req, res) {
+  app.get('*', isLoggedIn, function(req, res) {
     res.sendFile('./public/index.html', { root: __dirname + '/..' });
   });
 

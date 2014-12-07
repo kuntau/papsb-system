@@ -1,3 +1,7 @@
 <h1>{{ ::title }} page</h1>
 
-<p>{{ ::names[0] }} message {{ ::param }}</p>
+<p>{{ ::names[0] }} message {{ ::page }}</p>
+
+<ul>
+  <li data-ng-repeat="mass in massive">{{ mass }}</li>
+</ul>

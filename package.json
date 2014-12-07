@@ -28,6 +28,7 @@
     "gulp-concat": "^2.x",
     "gulp-filter": "^1.x",
     "gulp-livereload": "^2.x",
+    "gulp-ng-annotate": "^0.x",
     "gulp-nodemon": "^1.x",
     "gulp-stylus": "^1.x",
     "nib": "^1.x"

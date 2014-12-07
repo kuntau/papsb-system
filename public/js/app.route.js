@@ -13,9 +13,7 @@ function papsbInit ($rootScope, $state, $stateParams, toastr) {
   // monitor `state change`
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
     //event.preventDefault();
-    //console.log(event + ' state is changing! fromState:' + fromState + ' toState:' + toParams);
-    //console.log(JSON.stringify(toState, null, 4));
-    toastr.info(fromState.url + ' --> ' + toState.url + ': ' + toParams.page);
+    toastr.info(fromState.url + ' --> ' + toState.url + ': ' + toParams.page, 'State Changed!');
   })
 }
 
@@ -29,6 +27,11 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       url         : '/workshop',
       templateUrl : 'views/workshop.html',
       title       : 'Workshop Dashboard',
+      resolve     : {
+        WorkshopCtrl : function (UIService) {
+          return  "sidebar-hidden"
+        }
+      },
       onEnter     : function () {
         shell.sidebarStatus = '';
         shell.workshopStatus = true;
@@ -48,7 +51,15 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
         $scope.title = getTitle.title;
         $scope.page = $stateParams.page;
-        // toastr.success('The message from message 1: ' + $scope.title);
+
+        var massive = [];
+
+        for (var i = 10 - 1; i >= 0; i--) {
+          var word = 'random useless ' + $scope.page + ' and the couting: ' + i;
+          // toastr.warning(word);
+          massive.push(word)
+        }
+        $scope.massive = massive;
       },
       resolve     : {
         getTitle : function ($stateParams) {
