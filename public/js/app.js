@@ -2,7 +2,12 @@
 
 // create the module and name it papsb
 angular
-  .module('papsb', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'toastr'])
+  .module('papsb', [
+          'ui.bootstrap',
+          'ui.router',
+          'ngAnimate',
+          'toastr'
+          ])
   .controller('ShellCtrl', ShellCtrl)
   .controller('WorkshopCtrl', WorkshopCtrl)
   .controller('AboutCtrl', AboutCtrl)
@@ -14,9 +19,9 @@ ShellCtrl.$inject = ['UIService'];
 function ShellCtrl(UIService) {
   shell = this;
   // create a message to display in our view
-  shell.message = 'Everyone come and see how good id look';
-  shell.sidebarStatus = 'sidebar-hidden';
-  shell.workshopStatus = false;
+  shell.message        = 'Everyone come and see how good id look';
+  shell.sidebarStatus  = UIService.getSidebarStatus();
+  shell.workshopStatus = UIService.getWorkshopStatus();
 
   shell.sidebarToggle = function () {
     if (shell.sidebarStatus) {
@@ -27,14 +32,14 @@ function ShellCtrl(UIService) {
 
 WorkshopCtrl.$inject = ['UIService'];
 
-function WorkshopCtrl(UIService) {
+function WorkshopCtrl(ShellCtrl) {
   vm = this;
-}
+  console.log("WorkshopCtrl");
+};
 
 function AboutCtrl() {
   vm = this;
   vm.message = 'This is about page!';
-  //$scope.params = $stateParams;
 };
 
 function ContactCtrl($scope) {
@@ -44,8 +49,37 @@ function ContactCtrl($scope) {
 UIService.$inject = ['$rootScope', '$state'];
 
 function UIService($rootScope, $state) {
-  return "From: UIService";
-  // console.log("From: UIService");
-  // shell.sidebarStatus = 'sidebar-hidden';
-  // shell.workshopStatus = false;
+  var sidebarStatus = 'sidebar-hidden';
+  var workshopStatus = false;
+  console.log("From: UIService");
+
+  var service =  {
+    getSidebarStatus:   getSidebarStatus,
+    setSidebarStatus:   setSidebarStatus,
+    getWorkshopStatus:  getWorkshopStatus,
+    setWorkshopStatus:  setWorkshopStatus,
+    getSidebarState :   getSidebarState
+  };
+
+  return service;
+
+  function getSidebarStatus() {
+    // console.log("getSidebarStatus");
+    return sidebarStatus;
+  };
+  function setSidebarStatus(status) {
+    // console.log("setSidebarStatus");
+    sidebarStatus = status;
+  };
+  function getWorkshopStatus() {
+    // console.log("getWorkshopStatus");
+    return workshopStatus;
+  };
+  function setWorkshopStatus(status) {
+    // console.log("setWorkshopStatus");
+    workshopStatus = status;
+  };
+  function getSidebarState() {
+    return false;
+  };
 }

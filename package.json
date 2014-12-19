@@ -5,8 +5,9 @@
   "description": "papsb modular system",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp"
+    "test": "gulp test",
+    "install": "bower install",
+    "start": "gulp dev"
   },
   "author": "kuntau",
   "license": "ISC",

@@ -20,7 +20,7 @@
     mongoose.connect(database.url);
 
     // passport config
-    require('./config/passport')(passport)
+    require('./config/passport')(passport);
 
     // express setup
     app.use(express.static(__dirname + '/public'));

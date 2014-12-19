@@ -1,6 +1,7 @@
 /**
  * Created by kuntau on 8/11/14.
  */
+'use strict';
 
 // manage all routes in one file
 angular.module('papsb')
@@ -13,7 +14,7 @@ function papsbInit ($rootScope, $state, $stateParams, toastr) {
   // monitor `state change`
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
     //event.preventDefault();
-    toastr.info(fromState.url + ' --> ' + toState.url + ': ' + toParams.page, 'State Changed!');
+    toastr.info(fromState.url + ' >> ' + toState.url + ': ' + toParams.page, 'State Changed!');
   })
 }
 
@@ -27,12 +28,11 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       url         : '/workshop',
       templateUrl : 'views/workshop.html',
       title       : 'Workshop Dashboard',
-      resolve     : {
-        WorkshopCtrl : function (UIService) {
-          return  "sidebar-hidden"
-        }
-      },
-      onEnter     : function () {
+      controller  : 'WorkshopCtrl as vm',
+      onEnter     : function ($rootScope) {
+        // hacky solution but seems to work well
+        if (!shell)
+          $location.path('/')
         shell.sidebarStatus = '';
         shell.workshopStatus = true;
         shell.message = 'HIJAcked!! 1337';
