@@ -27,11 +27,11 @@
   "devDependencies": {
     "gulp": "^3.x",
     "gulp-concat": "^2.x",
-    "gulp-filter": "^1.x",
+    "gulp-filter": "^2.x",
     "gulp-livereload": "^3.x",
     "gulp-ng-annotate": "^0.x",
-    "gulp-nodemon": "^1.x",
-    "gulp-stylus": "^1.x",
+    "gulp-nodemon": "^2.x",
+    "gulp-stylus": "^2.x",
     "nib": "^1.x"
   }
 }
