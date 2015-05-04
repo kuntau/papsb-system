@@ -19,7 +19,8 @@ gulp.task('dev', ['css'], function() {
             ext: 'js',
             env: { 'NODE_ENV': 'development' },
             ignore: ['.git/**','.idea/**','./public/**']});
-  livereload.listen();
+//  livereload.listen();
+  livereload({ start: true });
   watcher.on('change', function (event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running task...');
   });
@@ -50,9 +51,10 @@ gulp.task('css', function () {
 });
 
 gulp.task('reload', ['css'], function () {
-  //setTimeout(function () {
-  livereload.changed();
-  //}, 500)
+  setTimeout(function () {
+//    livereload.changed();
+    livereload.reload();
+  }, 500)
 })
 
 gulp.task('watch', function() {
