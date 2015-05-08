@@ -1,3 +1,4 @@
+/// <reference path="../../typings/angularjs/angular.d.ts"/>
 // public/js/app.js
 
 // create the module and name it papsb
@@ -15,6 +16,13 @@ angular
   .factory('UIService', UIService);
 
 ShellCtrl.$inject = ['UIService'];
+
+function papsbConfig(toastrConfig) {
+  angular.extend(toastrConfig, {
+    positionClass: 'toast-bottom-right',
+    tapToDismiss: true
+  });
+};
 
 function ShellCtrl(UIService) {
   shell = this;

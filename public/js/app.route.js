@@ -6,6 +6,9 @@
 // manage all routes in one file
 angular.module('papsb')
   .run(['$rootScope', '$state', '$stateParams', 'toastr', papsbInit])
+  // .config(['$controllerProvider', function ($controllerProvider) {
+  //   $controllerProvider.allowGlobals();
+  // }])
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', papsbRoute]);
 
 function papsbInit ($rootScope, $state, $stateParams, toastr) {
@@ -13,12 +16,15 @@ function papsbInit ($rootScope, $state, $stateParams, toastr) {
   $rootScope.$stateParams = $stateParams;
   // monitor `state change`
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-    //event.preventDefault();
-    toastr.info(fromState.url + ' >> ' + toState.url + ': ' + toParams.page, 'State Changed!');
-  })
+    // event.preventDefault();
+    // toastr.info(fromState.url + ' >> ' + toState.url + ': ' + toParams.page, 'State Changed!', { positionClass: 'toastr-bottom-right' })
+    // toastr.success('hello', 'fun');
+  });
 }
 
-function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
+function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider, toastr) {
+  // $controllerProvider.allowGlobals();
+  //
   // $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider.otherwise('/workshop'); // for any unmatched url, redirect here
 
