@@ -13,13 +13,20 @@ gulp.task('default', function () {
 });
 
 gulp.task('dev', ['css'], function() {
-  var watcher = gulp.watch(['public/**', '!public/css/style.css'], ['reload']);
+  var watcher = gulp.watch([
+        'public/js/**',
+        'public/css/**',
+        'public/views/**',
+        'public/index.html',
+        '!public/css/style.css'
+        ], ['reload']);
 
   nodemon({ script: 'server.js',
             ext: 'js',
             env: { 'NODE_ENV': 'development' },
-            ignore: ['.git/**','.idea/**','./public/**']});
-//  livereload.listen();
+            ignore: ['.git/**','.idea/**','./public/**']
+          });
+
   livereload({ start: true });
   watcher.on('change', function (event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running task...');
