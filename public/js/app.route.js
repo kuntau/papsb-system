@@ -5,26 +5,26 @@
 
 // manage all routes in one file
 angular.module('papsb')
-  .run(['$rootScope', '$state', '$stateParams', 'toastr', papsbInit])
-  // .config(['$controllerProvider', function ($controllerProvider) {
-  //   $controllerProvider.allowGlobals();
-  // }])
+  .run(['$rootScope', '$state', '$stateParams', 'toastr', 'toastrConfig', papsbInit])
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', papsbRoute]);
 
-function papsbInit ($rootScope, $state, $stateParams, toastr) {
+function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig) {
   $rootScope.$state = $state;
   $rootScope.$stateParams = $stateParams;
   // monitor `state change`
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
     // event.preventDefault();
-    // toastr.info(fromState.url + ' >> ' + toState.url + ': ' + toParams.page, 'State Changed!', { positionClass: 'toastr-bottom-right' })
-    // toastr.success('hello', 'fun');
+    angular.extend(toastrConfig, {
+      positionClass: 'toast-bottom-right',
+      tapToDismiss: true,
+      newestOnTop: false
+    });
+    var toastrMessage = toParams.page  ? toParams.page : 'no parameters'
+    toastr.info(fromState.url + ' --> ' + toState.url + ' #' + toastrMessage, 'State Changed!', { positionClass: 'toastr-bottom-right' })
   });
 }
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider, toastr) {
-  // $controllerProvider.allowGlobals();
-  //
   // $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider.otherwise('/workshop'); // for any unmatched url, redirect here
 
@@ -37,15 +37,18 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider, toas
       controller  : 'WorkshopCtrl as vm',
       onEnter     : function ($rootScope) {
         // hacky solution but seems to work well
-        if (!shell)
-          $location.path('/')
-        shell.sidebarStatus = '';
-        shell.workshopStatus = true;
-        shell.message = 'HIJAcked!! 1337';
+        // if (!shell)
+        //   $location.path('/')
+        // $parent.shell.sidebarStatus = '';
+        // $parent.shell.workshopStatus = true;
+        // shell.message = 'HIJAcked!! 1337';
+        // WorkshopCtrl.onEnter();
+        // ShellCtrl.openSidebar;
       },
       onExit     : function () {
-        shell.sidebarStatus = 'sidebar-hidden';
-        shell.workshopStatus = false;
+        // shell.sidebarStatus = 'sidebar-hidden';
+        // shell.workshopStatus = false;
+        WorkshopCtrl.onEnter;
       }
     })
 
