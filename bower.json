@@ -16,8 +16,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.x",
-    "angular-animate": "^1.x",
+    "angular": "^1.4",
+    "angular-animate": "^1.4",
     "angular-ui-router": "^0.x",
     "angular-ui-bootstrap-bower": "^0.x",
     "bootstrap": "^3.x",
