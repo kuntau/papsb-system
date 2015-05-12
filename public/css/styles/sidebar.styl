@@ -3,68 +3,49 @@
 @require 'variables'
 
 .sidebar-nav
-  width 250px
-  margin 0
-  padding 0
+  margin-right -21px
+  margin-bottom 20px
+  margin-left -20px
 
-.sidebar-nav li
-  text-indent 20px
-  line-height 40px
+//.sidebar-nav li
+//  text-indent 20px
+//  line-height 40px
 
-.sidebar-nav li a
-  display block
-  text-decoration none
-  color #999
+.sidebar-nav > li > a
+  padding-right 20px
+  padding-left 20px
+  //display block
+  //text-decoration none
+  color #ddd
 
-.sidebar-nav li a:hover
-  text-decoration none
-  color #fff
-  background rgba(255, 255, 255, 0.2)
-
+.sidebar-nav li a:hover,
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus
   text-decoration none
   background rgba(235, 235, 235, 0.2)
 
-#sidebar-wrapper
-  z-index 1000
-  position fixed
-  left 250px
-  width 0
-  height 90%
-  margin-left -250px
-  overflow-y auto
-  background $midnightblue
-  -webkit-transition all 0.5s ease
-  transition all 0.5s ease
-  -webkit-transform translate3d(0, 0, 0) //hacky way to force redraw
+.sidebar-nav li a:hover
+  background rgba(255, 255, 255, 0.2)
 
-#wrapper.sidebar-hidden #sidebar-wrapper
-  width 250px
-  /* visibility hidden */
+.sidebar-wrapper
+  display none
 
-#wrapper.sidebar-hidden #content-wrapper
-  position absolute
-  margin-right -250px
+@media(min-width:768px)
+  .sidebar-wrapper
+    position fixed
+    display block
+    top 70px
+    bottom 0
+    left 0
+    z-index 1000
+    //padding 20px
+    //height 90%
+    overflow-x hidden
+    overflow-y auto
+    background $midnightblue
+    border-right 1px solid #eee
+    //-webkit-transition all 0.5s ease
+    //transition all 0.5s ease
+    //-webkit-transform translate3d(0, 0, 0) //hacky way to force redraw
 
-@media(min-width:768px) {
-  #wrapper {
-    padding-left: 250px;
-  }
-  #wrapper.sidebar-hidden {
-    padding-left: 0;
-  }
-  #sidebar-wrapper {
-    width: 250px;
-  }
-  #wrapper.sidebar-hidden #sidebar-wrapper {
-    width: 0;
-  }
-  #content-wrapper {
-    padding: 20px;
-  }
-  #wrapper.sidebar-hidden #content-wrapper {
-    position: relative;
-    margin-right: 0;
-  }
-}
+
