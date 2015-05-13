@@ -12,6 +12,7 @@ angular
   .controller('WorkshopCtrl', WorkshopCtrl)
   .controller('AboutCtrl', AboutCtrl)
   .controller('ContactCtrl', ContactCtrl)
+  .directive('bsHolder', bsHolder)
   .factory('UIService', UIService);
 
 ShellCtrl.$inject = ['UIService'];
@@ -57,8 +58,15 @@ function ContactCtrl($scope) {
   this.message = 'You now can contact us!!';
 };
 
-UIService.$inject = ['$rootScope', '$state'];
+function bsHolder() {
+  return {
+    link: function (scope, el, attr) {
+      Holder.run(el);
+    }
+  };
+}
 
+UIService.$inject = ['$rootScope', '$state'];
 function UIService($rootScope, $state) {
   var shell = this;
   var sidebarStatus = 'sidebar-hidden';
