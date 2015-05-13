@@ -14,7 +14,7 @@ angular
   .controller('ContactCtrl', ContactCtrl)
   .factory('UIService', UIService);
 
-// ShellCtrl.$inject = ['UIService'];
+ShellCtrl.$inject = ['UIService'];
 
 function ShellCtrl(UIService) {
   var shell = this;
@@ -37,10 +37,6 @@ function WorkshopCtrl(toastr) {
   var vm = this;
   vm.sidebarStatus = '';
   vm.workshopStatus = true;
-
-  var onEnter = function () {
-    ShellCtrl.openSidebar;
-  }
 
   function onEnter() {
     ShellCtrl.openSidebar();
@@ -66,7 +62,6 @@ UIService.$inject = ['$rootScope', '$state'];
 function UIService($rootScope, $state) {
   var shell = this;
   var sidebarStatus = 'sidebar-hidden';
-  var sidebarStatus = '';
   var workshopStatus = false;
   console.log("From: UIService/ShellCtrl");
   // create a message to display in our view
