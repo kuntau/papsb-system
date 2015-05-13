@@ -1,12 +1,13 @@
-<div id="sidebar-wrapper" ng-hide="vm.sidebarStatus">
-  <ul class="unstyled sidebar-nav">
-    <li ui-sref-active="active"><a ui-sref=".message1({ page: 'minum' })">Minum</a></li>
-    <li ui-sref-active="active"><a ui-sref=".message1({ page: 'makan' })">Makan</a></li>
-    <li ui-sref-active="active"><a ui-sref=".message1({ page: 'bangku' })">Bangku</a></li>
-    <li ui-sref-active="active"><a ui-sref=".message1({ page: 'kangkung' })">Kangkung</a></li>
+<!--<div id="sidebar-wrapper" class="col-xs-3 col-md-2 sidebar-wrapper" ng-hide="vm.sidebarStatus">-->
+  <ul class="nav sidebar-nav">
+    <li ui-sref-active="active"><a ui-sref=".message1({ page: 'minum' })">Overview</a></li>
+    <li ui-sref-active="active"><a ui-sref=".message1({ page: 'makan' })">Bus List</a></li>
+    <li ui-sref-active="active"><a ui-sref=".message1({ page: 'bangku' })">Report</a></li>
+    <li ui-sref-active="active"><a ui-sref=".message1({ page: 'kangkung' })">Export</a></li>
     <li ui-sref-active="active"><a ui-sref=".message1({ page: 'bola' })">bola</a></li>
+  </ul>
+  <ul class="nav sidebar-nav">
     <li ui-sref-active="active"><a ui-sref=".message2">Message 2</a></li>
-    <li ui-sref-active="active"><a ui-sref=".message2">Message 2</a></li>
+    <li ui-sref-active="active"><a ui-sref=".message1">Message 1</a></li>
     <li ui-sref-active="active"><a ui-sref=".message2">Message 2</a></li>
   </ul>
-</div>

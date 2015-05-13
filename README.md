@@ -1,4 +1,16 @@
-node-spa-partials
-====================
+PAPSB SYSTEM
+============
 
-based on `http://scotch.io/` tutorial
+Modules
+-------
+
+- Workshop
+- Operation
+- Finance
+
+App
+---
+
+- iOS
+- Android
+- Windows Phone

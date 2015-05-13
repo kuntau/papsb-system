@@ -23,7 +23,10 @@
     "bootstrap": "^3.x",
     "font-awesome": "^4.x",
     "angular-toastr": "^1.x",
-    "Faker": "^2.x",
     "spin.js": "^2.x"
+  },
+  "devDependencies": {
+    "Faker": "^2.x",
+    "holderjs": "^2.x"
   }
 }
