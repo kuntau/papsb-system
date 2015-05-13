@@ -1,19 +1,31 @@
 /**
  * Created by kuntau on 8/11/14.
  */
+'use strict';
 
 // manage all routes in one file
 angular.module('papsb')
-  .run(['$rootScope', '$state', '$stateParams', papsbInit])
+  .run(['$rootScope', '$state', '$stateParams', 'toastr', 'toastrConfig', papsbInit])
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', papsbRoute]);
 
-function papsbInit ($rootScope, $state, $stateParams) {
+function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig) {
   $rootScope.$state = $state;
   $rootScope.$stateParams = $stateParams;
+  // monitor `state change`
+  $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+    // event.preventDefault();
+    angular.extend(toastrConfig, {
+      positionClass: 'toast-bottom-right',
+      tapToDismiss: true,
+      newestOnTop: false
+    });
+    var toastrMessage = toParams.page  ? toParams.page : 'no parameters'
+    toastr.info(fromState.url + ' --> ' + toState.url + ' #' + toastrMessage, 'State Changed!', { positionClass: 'toastr-bottom-right' })
+  });
 }
 
-function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
-  $locationProvider.html5Mode(true).hashPrefix('!');
+function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider, toastr) {
+  // $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider.otherwise('/workshop'); // for any unmatched url, redirect here
 
   $stateProvider
@@ -22,38 +34,68 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       url         : '/workshop',
       templateUrl : 'views/workshop.html',
       title       : 'Workshop Dashboard',
-      onEnter     : function () {
-        vm.sidebarStatus = '';
-        vm.workshopStatus = true;
+      controller  : 'WorkshopCtrl as vm',
+      onEnter     : function ($rootScope) {
+        // hacky solution but seems to work well
+        // if (!shell)
+        //   $location.path('/')
+        // $parent.shell.sidebarStatus = '';
+        // $parent.shell.workshopStatus = true;
+        // shell.message = 'HIJAcked!! 1337';
+        // WorkshopCtrl.onEnter();
+        // ShellCtrl.openSidebar;
       },
       onExit     : function () {
-        vm.sidebarStatus = 'sidebar-hidden';
-        vm.workshopStatus = false;
+        // shell.sidebarStatus = 'sidebar-hidden';
+        // shell.workshopStatus = false;
+        WorkshopCtrl.onEnter;
       }
     })
-
-    //.state('workshop.index', {
-    //  url         : '/index',
-    //  templateUrl : 'views/workshop.html'
-    //})
 
     .state('workshop.message1', {
-      url         : '/message1',
+      url         : '/:page',
       templateUrl : 'views/workshop.message1.html',
       title       : 'Message 1',
-      controller  : function ($scope, toastr) {
+      controller  : function ($scope, $stateParams, toastr, getTitle) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
-        toastr.success('The message from message 1: ' + $scope.names[2]);
+        $scope.title = getTitle.title;
+        $scope.page = $stateParams.page;
+
+        var massive = [];
+
+        for (var i = 10 - 1; i >= 0; i--) {
+          var word = 'random useless ' + $scope.page + ' and the couting: ' + i;
+          // toastr.warning(word);
+          massive.push(word)
+        }
+        $scope.massive = massive;
+      },
+      resolve     : {
+        getTitle : function ($stateParams) {
+                    return { title: $stateParams.page }
+        }},
+      data        : {
+        titlex: 'haish'
       }
     })
 
+    // .state('workshop.message1', {
+    //   url         : '/message1',
+    //   templateUrl : 'views/workshop.message1.html',
+    //   title       : 'Message 1',
+    //   controller  : function ($scope, toastr) {
+    //     $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
+    //     toastr.success('The message from message 1: ' + $scope.names[2]);
+    //   }
+    // })
+    //
     .state('workshop.message2', {
-      url         : '/message2',
+      url         : '/aum/message2',
       templateUrl : 'views/workshop.message2.html',
       title       : 'Message 2',
       controller  : function ($scope, toastr) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
-        toastr.info('The message from message 2: ' + $scope.names[0]);
+        // toastr.warning('The message from message 2: ' + $scope.names[0]);
       }
     })
 
@@ -61,15 +103,22 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('about', {
       url         : '/about',
       templateUrl : 'views/about.html',
-      controller  : 'aboutController',
+      controller  : 'AboutCtrl as vm',
       title       : 'About Us'
     })
 
     .state('contact', {
       url         : '/contact',
       templateUrl : 'views/contact.html',
-      controller  : 'contactController',
-      title       : 'Contact Us'
+      controller  : 'ContactCtrl as vm',
+      title       : 'Contact Us',
+      resolve     : {
+        delay: function ($q, $timeout) {
+          var delay = $q.defer();
+          $timeout(delay.resolve, 100);
+          return delay.promise;
+        }
+      }
     })
 
     .state('login', {

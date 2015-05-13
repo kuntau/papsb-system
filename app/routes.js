@@ -2,18 +2,20 @@
 
 var Todo = require('./models/todo');
 
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    console.log('routes.js --> user is authenticated');
+    return next();
+  }
+
+  console.log('routes.js --> user not logged in');
+  // res.redirect(401, '/index.html');
+  // res.sendStatus('401');
+  // res.sendFile('./public/index.html', { root: __dirname + '/..' });
+  return next();
+}
+
 module.exports = function(app, passport) {
-
-  /*
-  // main static folders
-  var root = __dirname + '/..';
-
-  app.use('/js', express.static(root + '/js'));
-  app.use('/css', express.static(root + '/css'));
-  app.use('/libs', express.static(root + '/libs'));
-  app.use('/views', express.static(root + '/views'));
-  app.use('/img', express.static(root + '/img'));
-  */
 
   // api -------------
   // get all todos
@@ -68,7 +70,11 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('*', function(req, res) {
+  app.get('/login', function (req, res) {
+    res.sendStatus(404);
+  });
+
+  app.get('*', isLoggedIn, function(req, res) {
     res.sendFile('./public/index.html', { root: __dirname + '/..' });
   });
 
