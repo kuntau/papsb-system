@@ -10,16 +10,18 @@
 .sidebar-nav > li > a
   padding-right 20px
   padding-left 20px
-  color #ddd
+  color $sidebarcolor
 
 .sidebar-nav li a:hover,
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus
   text-decoration none
   background rgba(235, 235, 235, 0.2)
+  color $sidebaractivecolor
 
 .sidebar-nav li a:hover
   background rgba(255, 255, 255, 0.2)
+  color $sidebarhovercolor
 
 .sidebar-wrapper
   display none
@@ -28,13 +30,14 @@
   .sidebar-wrapper
     position fixed
     display block
-    top 70px
+    padding 20px
+    top 71px
     bottom 0
     left 0
     z-index 1000
     overflow-x hidden
     overflow-y auto
-    background $midnightblue
+    background $sidebarbgcolor
     border-right 1px solid #eee
     //-webkit-transition all 0.5s ease
     //transition all 0.5s ease

@@ -4,12 +4,18 @@
 
 @require 'fonts'
 
-/* colors */
+/* topnav colors */
 $topnavcolor = rgb(123, 128, 135)
 $topnavbrandcolor = $midnightblue
 $topnavhovercolor = #0f97f9
 $topnavbgcolor = rgba(255,255,255, .85)
 $topnavbghovercolor = rgba(242, 243, 247, .50)
+
+/* sidebar colors and variable */
+$sidebarbgcolor = $midnightblue
+$sidebarcolor = #d5d5d5
+$sidebarhovercolor = lighten($sidebarcolor, 10) /* #3ece97 */
+$sidebaractivecolor = lighten($sidebarcolor, 20) /* #3ece97 */
 
 /* flat ui swatch */
 $turquoise = #1abc9c
@@ -22,7 +28,7 @@ $greensea = #16a085
 $nephritis = #27ae60
 $belizehole = #2980b9
 $wisteria = #8e44ad
-$midnightblue = #2c3e50
+$midnightblue = rgba(44, 62, 80, 1) /* #2c3e50 */
 
 $sunflower = #f1c40f
 $carrot = #e67e22
@@ -35,7 +41,6 @@ $pumpkin = #d35400
 $pomegranate = #c0392b
 $silver = #bdc3c7
 $asbestos = #7f8c8d
-
 
 /* fonts */
 $font-proxima = "Proxima Nova", "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif
