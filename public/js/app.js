@@ -32,12 +32,17 @@ function ShellCtrl(UIService) {
 };
 // WorkshopCtrl.$inject = ['ShellCtrl'];
 
-function WorkshopCtrl(toastr) {
+function WorkshopCtrl(UIService, $scope) {
   console.log("WorkshopCtrl");
 
   var vm = this;
   vm.sidebarStatus = '';
   vm.workshopStatus = true;
+  UIService.setWorkshopStatus(true);
+
+  //$scope.$apply(function () {
+  //  $scope.workshopStatus = true;
+  //});
 
   function onEnter() {
     ShellCtrl.openSidebar();
@@ -54,8 +59,9 @@ function AboutCtrl() {
   vm.message = 'This is about page!';
 };
 
-function ContactCtrl($scope) {
-  this.message = 'You now can contact us!!';
+function ContactCtrl() {
+  var vm = this;
+  vm.message = 'You now can contact us!!';
 };
 
 function bsHolder() {
@@ -66,22 +72,11 @@ function bsHolder() {
   };
 }
 
-UIService.$inject = ['$rootScope', '$state'];
-function UIService($rootScope, $state) {
-  var shell = this;
+UIService.$inject = [];
+function UIService() {
   var sidebarStatus = 'sidebar-hidden';
   var workshopStatus = false;
   console.log("From: UIService/ShellCtrl");
-  // create a message to display in our view
-  shell.message        = 'Everyone come and see how good id look';
-  shell.sidebarStatus  = 'sidebar-hidden';
-  shell.workshopStatus = false;
-
-  shell.sidebarToggle = function () {
-    if (shell.sidebarStatus) {
-      shell.sidebarStatus = "";
-    } else { shell.sidebarStatus = 'sidebar-hidden' }
-  }
 
   var service =  {
     openSidebar:        openSidebar,
@@ -99,13 +94,11 @@ function UIService($rootScope, $state) {
     console.log("opening sidebar... ");
     shell.sidebarStatus = '';
     shell.workshopStatus = true;
-    return;
   };
   function closeSidebar() {
     console.log("closing sidebar... ");
     shell.sidebarStatus = 'sidebar-hidden';
     shell.workshopStatus = false;
-    return;
   };
   function getSidebarStatus() {
     console.log("getSidebarStatus: " + sidebarStatus);

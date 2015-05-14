@@ -20,7 +20,7 @@ function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig) {
       newestOnTop: false
     });
     var toastrMessage = toParams.page  ? toParams.page : 'no parameters'
-    toastr.info(fromState.url + ' --> ' + toState.url + ' #' + toastrMessage, 'State Changed!', { positionClass: 'toastr-bottom-right' })
+    //toastr.info(fromState.url + ' --> ' + toState.url + ' #' + toastrMessage, 'State Changed!', { positionClass: 'toastr-bottom-right' })
   });
 }
 
@@ -35,20 +35,17 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider, toas
       templateUrl : 'views/workshop.html',
       title       : 'Workshop Dashboard',
       controller  : 'WorkshopCtrl as vm',
-      onEnter     : function ($rootScope) {
-        // hacky solution but seems to work well
-        // if (!shell)
-        //   $location.path('/')
+      onEnter     : function () {
         // $parent.shell.sidebarStatus = '';
         // $parent.shell.workshopStatus = true;
-        // shell.message = 'HIJAcked!! 1337';
+         shell.message = 'HIJAcked!! 1337';
         // WorkshopCtrl.onEnter();
         // ShellCtrl.openSidebar;
       },
       onExit     : function () {
         // shell.sidebarStatus = 'sidebar-hidden';
         // shell.workshopStatus = false;
-        WorkshopCtrl.onEnter;
+        //WorkshopCtrl.onEnter;
       }
     })
 
