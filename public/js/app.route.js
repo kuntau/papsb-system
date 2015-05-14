@@ -24,7 +24,7 @@ function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig) {
   });
 }
 
-function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider, toastr) {
+function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
   // $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider.otherwise('/workshop'); // for any unmatched url, redirect here
 
@@ -35,17 +35,11 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider, toas
       templateUrl : 'views/workshop.html',
       title       : 'Workshop Dashboard',
       controller  : 'WorkshopCtrl as vm',
-      onEnter     : function () {
-        // $parent.shell.sidebarStatus = '';
-        // $parent.shell.workshopStatus = true;
-         shell.message = 'HIJAcked!! 1337';
-        // WorkshopCtrl.onEnter();
-        // ShellCtrl.openSidebar;
+      onEnter     : function (UIService) {
+        UIService.setWorkshopStatus(true);
       },
-      onExit     : function () {
-        // shell.sidebarStatus = 'sidebar-hidden';
-        // shell.workshopStatus = false;
-        //WorkshopCtrl.onEnter;
+      onExit     : function (UIService) {
+        UIService.setWorkshopStatus(false);
       }
     })
 

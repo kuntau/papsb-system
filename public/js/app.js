@@ -15,9 +15,10 @@ angular
   .directive('bsHolder', bsHolder)
   .factory('UIService', UIService);
 
-ShellCtrl.$inject = ['UIService'];
+ShellCtrl.$inject = ['UIService', '$scope'];
 
-function ShellCtrl(UIService) {
+function ShellCtrl(UIService, $scope) {
+  console.log("From: ShellCtrl");
   var shell = this;
   // create a message to display in our view
   shell.message        = 'Everyone come and see how good id look';
@@ -28,41 +29,33 @@ function ShellCtrl(UIService) {
     if (shell.sidebarStatus) {
       shell.sidebarStatus = "";
     } else { shell.sidebarStatus = 'sidebar-hidden' }
-  }
-};
-// WorkshopCtrl.$inject = ['ShellCtrl'];
+  };
 
-function WorkshopCtrl(UIService, $scope) {
-  console.log("WorkshopCtrl");
+  $scope.$watch(UIService.getWorkshopStatus, function () {
+    shell.workshopStatus = UIService.getWorkshopStatus();
+    console.log('ShellCtrl::Watch::WSStatus: ' + shell.workshopStatus);
+  });
+}
+
+
+// WorkshopCtrl.$inject = ['ShellCtrl'];
+function WorkshopCtrl(UIService) {
+  //console.log("WorkshopCtrl");
 
   var vm = this;
-  vm.sidebarStatus = '';
-  vm.workshopStatus = true;
-  UIService.setWorkshopStatus(true);
 
-  //$scope.$apply(function () {
-  //  $scope.workshopStatus = true;
-  //});
-
-  function onEnter() {
-    ShellCtrl.openSidebar();
-    console.log("openSidebar");
-  };
-
-  function onExit() {
-    ShellCtrl.closeSidebar();
-  };
-};
+  //console.log('WorkshopCtrl::WSStatus: ' + UIService.getWorkshopStatus());
+}
 
 function AboutCtrl() {
   var vm = this;
   vm.message = 'This is about page!';
-};
+}
 
 function ContactCtrl() {
   var vm = this;
   vm.message = 'You now can contact us!!';
-};
+}
 
 function bsHolder() {
   return {
@@ -76,48 +69,32 @@ UIService.$inject = [];
 function UIService() {
   var sidebarStatus = 'sidebar-hidden';
   var workshopStatus = false;
-  console.log("From: UIService/ShellCtrl");
+  console.log("From: UIService");
 
   var service =  {
-    openSidebar:        openSidebar,
-    closeSidebar:       closeSidebar,
     getSidebarStatus:   getSidebarStatus,
     setSidebarStatus:   setSidebarStatus,
     getWorkshopStatus:  getWorkshopStatus,
     setWorkshopStatus:  setWorkshopStatus,
-    getSidebarState :   getSidebarState
   };
 
   return service;
 
-  function openSidebar() {
-    console.log("opening sidebar... ");
-    shell.sidebarStatus = '';
-    shell.workshopStatus = true;
-  };
-  function closeSidebar() {
-    console.log("closing sidebar... ");
-    shell.sidebarStatus = 'sidebar-hidden';
-    shell.workshopStatus = false;
-  };
   function getSidebarStatus() {
-    console.log("getSidebarStatus: " + sidebarStatus);
+    //console.log("getSidebarStatus: " + sidebarStatus);
     return sidebarStatus;
-  };
+  }
   function setSidebarStatus(status) {
-    console.log("setSidebarStatus: " + status);
+    //console.log("setSidebarStatus: " + status);
     sidebarStatus = status;
-  };
+  }
   function getWorkshopStatus() {
-    console.log("getWorkshopStatus: " + workshopStatus);
+    //console.log("getWorkshopStatus: " + workshopStatus);
     return workshopStatus;
-  };
+  }
   function setWorkshopStatus(status) {
-    console.log("setWorkshopStatus: " + status);
+    //console.log("setWorkshopStatus: " + status);
     workshopStatus = status;
-  };
-  function getSidebarState() {
-    return false;
-  };
+  }
 }
 
