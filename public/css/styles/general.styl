@@ -16,22 +16,7 @@ h1, h2, h3, h4, h5, h6
   font-family $font-gotham
   text-transform uppercase
 
-#wrapper
-  //-webkit-transition all 0.5s ease
-  //transition all 0.5s ease
-
-#wrapper.sidebar-hidden
-  //padding-left 250px
-
-#content-wrapper
-  //width 100%
-  /*-webkit-transform translate3d(0, 0, 0) //hacky way to force chrome redraw*/
-
 #spinner
-  //position absolute
-  //top -190px
-  //left -360px
-  /*padding 0 auto*/
   display none
 
 .main
@@ -47,12 +32,24 @@ h1, h2, h3, h4, h5, h6
 
 .main .sub-header
   padding-bottom 10px
-  border-bottom 1px solid #eee
+  border-bottom 1px solid $silver
 
 
 /*
-* Placeholder dashboard ideas
-*/
+ * utilities class
+ * TODO: When overwhelmed, extract to separate file
+ */
+
+.valign
+  margin-top 120px
+  padding 50px
+  //border solid 1px $silver
+  border-radius 1em
+  box-shadow $silver 0 0 25px
+
+/*
+ * Placeholder dashboard ideas
+ */
 
 .placeholders
   margin-bottom 30px
@@ -67,7 +64,3 @@ h1, h2, h3, h4, h5, h6
 .placeholder img
   display inline-block
   border-radius 50%
-
-footer
-  //position fixed
-  //bottom 0
