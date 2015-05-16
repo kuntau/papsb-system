@@ -74,7 +74,7 @@ module.exports = function(app, passport) {
     res.sendStatus(404);
   });
 
-  app.get('*', isLoggedIn, function(req, res) {
+  app.get('/*', isLoggedIn, function(req, res) {
     res.sendFile('./public/index.html', { root: __dirname + '/..' });
   });
 
