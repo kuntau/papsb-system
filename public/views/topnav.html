@@ -1,12 +1,12 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-header">
-    <a ui-sref="workshop" class="navbar-brand"><i class="fa fa-home fa-lg"></i> papsb internal</a>
+    <a ui-sref="login" class="navbar-brand"><i class="fa fa-home fa-lg"></i> papsb internal</a>
   </div>
 
   <ul class="nav navbar-nav navbar-right">
     <li ng-show="shell.workshopStatus"><a ng-click="shell.sidebarToggle()"><i class="fa fa-adn"></i>workshop
       <span class="badge">{{shell.workshopStatus ? 'ON' : 'OFF'}}</span></a></li>
-    <li><a href="#" data-app-login="login"><i class="fa fa-sign-in"></i>Sign In</a></li>
+    <li><a ui-sref="login" data-app-login="login"><i class="fa fa-sign-in"></i>Sign In</a></li>
   </ul>
   <ul class="nav navbar-nav">
     <li ui-sref-active="active"><a ui-sref="workshop"><i class="fa fa-wrench"></i>WORKSHOP</a></li>

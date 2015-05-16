@@ -11,30 +11,36 @@ angular.module('papsb')
 function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig) {
   $rootScope.$state = $state;
   $rootScope.$stateParams = $stateParams;
-  // monitor `state change`
-  $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-    // event.preventDefault();
     angular.extend(toastrConfig, {
       positionClass: 'toast-bottom-right',
       tapToDismiss: true,
       newestOnTop: false
     });
+  // monitor `state change`
+  $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+    if (toState.redirectTo) {
+      event.preventDefault();
+      $state.go(toState.redirectTo, toParams)
+    }
     var toastrMessage = toParams.page  ? toParams.page : 'no parameters'
-    //toastr.info(fromState.url + ' --> ' + toState.url + ' #' + toastrMessage, 'State Changed!', { positionClass: 'toastr-bottom-right' })
+    toastr.info(fromState.url + ' --> ' + toState.url + ' #' + toastrMessage, 'State Changed!', { positionClass: 'toastr-bottom-right' })
   });
 }
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
   // $locationProvider.html5Mode(true).hashPrefix('!');
-  $urlRouterProvider.otherwise('/workshop'); // for any unmatched url, redirect here
+  $urlRouterProvider
+    // .when('/workshop', '/workshop.index')
+    .otherwise('about'); // for any unmatched url, redirect here
 
   $stateProvider
     // route for the workshop page
     .state('workshop', {
       url         : '/workshop',
-      templateUrl : 'views/workshop.html',
+      templateUrl : 'views/workshop/workshop.html',
       title       : 'Workshop Dashboard',
       controller  : 'WorkshopCtrl as vm',
+      redirectTo  : 'workshop.overview',
       onEnter     : function (UIService) {
         UIService.setWorkshopStatus(true);
       },
@@ -43,9 +49,17 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     })
 
+    .state('workshop.overview', {
+      url         : '/overview',
+      templateUrl : 'views/workshop/workshop.overview.html',
+      title       : 'Overview',
+      // controller  : function ($scope, toastr) {
+      //   $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
+      // }
+    })
     .state('workshop.message1', {
       url         : '/:page',
-      templateUrl : 'views/workshop.message1.html',
+      templateUrl : 'views/workshop/workshop.message1.html',
       title       : 'Message 1',
       controller  : function ($scope, $stateParams, toastr, getTitle) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
@@ -82,7 +96,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
     //
     .state('workshop.message2', {
       url         : '/aum/message2',
-      templateUrl : 'views/workshop.message2.html',
+      templateUrl : 'views/workshop/workshop.message2.html',
       title       : 'Message 2',
       controller  : function ($scope, toastr) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
