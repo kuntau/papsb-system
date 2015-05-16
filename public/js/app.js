@@ -71,14 +71,12 @@ function UIService() {
   var workshopStatus = false;
   console.log("From: UIService");
 
-  var service =  {
+  return {
     getSidebarStatus:   getSidebarStatus,
     setSidebarStatus:   setSidebarStatus,
     getWorkshopStatus:  getWorkshopStatus,
     setWorkshopStatus:  setWorkshopStatus,
   };
-
-  return service;
 
   function getSidebarStatus() {
     //console.log("getSidebarStatus: " + sidebarStatus);
