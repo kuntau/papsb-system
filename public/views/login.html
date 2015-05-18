@@ -2,22 +2,28 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-6 col-xs-offset-3 valign">
-      <!--<div class="col-xs-12 valign">-->
+    <div class="col-xs-6 col-xs-offset-3 auth-form">
 
       <h2><span class="fa fa-sign-in"> Login</h2>
-      <form action="/api/login" method="post" role="form">
+      <form ng-submit="vm.login()" role="form">
         <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input class="form-control" id="exampleInputEmail1" placeholder="Enter email" type="text"/>
+          <label>Username</label>
+          <input class="form-control" ng-model="vm.user.username" placeholder="Enter username" type="text"/>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input class="form-control" id="exampleInputPassword1" placeholder="Password" type="password"/>
+          <label>Password</label>
+          <input class="form-control" ng-model="vm.user.password" placeholder="Enter password" type="password"/>
         </div>
         <div class="checkbox"><label><input type="checkbox">Remember me</input></label></div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3 auth-info">
+        <p>
+          Need an account? <a href="#">Singup</a><br/>
+          Forget password? <a href="#">Recover</a><br/>
+          Page info? <a href="#">{{ ::vm.giggle }}</a>
+        </p>
     </div>
   </div>
 </div>
