@@ -17,10 +17,10 @@
         <li ui-sref-active="active"><a ui-sref="contact"><i class="fa fa-comment"></i>CONTACT</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li ng-if="shell.workshopStatus"><a ng-click="shell.sidebarToggle()"><i class="fa fa-adn"></i>w
-          <span class="badge">{{shell.sidebarStatus ? 'ON' : 'OFF'}}</span></a></li>
-        <li><a ui-sref="login" ng-if="!shell.user"><i class="fa fa-sign-in"></i>Sign In</a></li>
-        <li><a ui-sref="logout" ng-if="shell.user"><i class="fa fa-sign-out"></i>Hello {{ ::shell.user }}</a></li>
+        <li ng-if="shell.workshopStatus()"><a ng-click="shell.sidebarToggle()"><i class="fa fa-adn"></i>w
+          <span class="badge">{{shell.sidebarStatus() ? 'ON' : 'OFF'}}</span></a></li>
+        <li><a ui-sref="login" ng-if="!shell.user.authenticated"><i class="fa fa-sign-in"></i>Sign In</a></li>
+        <li><a href="#" ng-click="shell.logout()" ng-if="shell.user.authenticated"><i class="fa fa-sign-out"></i>Hello {{ shell.user.username }}</a></li>
       </ul>
     </div><!-- collapse -->
   </div><!-- container-fluid -->

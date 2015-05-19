@@ -18,26 +18,38 @@ angular
   .factory('Auth', Auth)
   .factory('UI', UI);
 
-ShellCtrl.$inject = ['$scope', 'UI', 'Auth'];
-function ShellCtrl($scope, UI, Auth) {
+ShellCtrl.$inject = ['$scope', '$state','UI', 'Auth'];
+function ShellCtrl($scope, $state, UI, Auth) {
   console.log("From: ShellCtrl");
   var shell = this;
-  // create a message to display in our view
-  shell.message        = 'Everyone come and see how good id look';
-  shell.sidebarStatus  = UI.getSidebarStatus();
-  shell.workshopStatus = UI.getWorkshopStatus();
-  shell.user = Auth.isLogged();
+  Activate();
 
-  shell.sidebarToggle = function () {
-    if (shell.sidebarStatus) {
-      shell.sidebarStatus = "";
-    } else { shell.sidebarStatus = 'sidebar-hidden' }
-  };
+  function Activate() {
+    // create a message to display in our view
+    shell.message        = 'Everyone come and see how good id look';
+    shell.sidebarStatus  = UI.getSidebarStatus;
+    shell.workshopStatus = UI.getWorkshopStatus;
+    shell.auth = Auth.isLogged;
+    shell.user = {
+      //authenticated: Auth.isLogged
+    };
 
-  $scope.$watch(UI.getWorkshopStatus, function () {
-    shell.workshopStatus = UI.getWorkshopStatus();
+    //console.log('ShellCtrl: Activate ' +  shell.user.authenticated);
+    Auth.get();
+    //shell.user = Auth.getUser();
+  }
+
+  $scope.$watch(Auth.isLogged, function () {
+    shell.user = Auth.getUser();
     //console.log('ShellCtrl::Watch::WSStatus: ' + shell.workshopStatus);
   });
+
+  shell.logout = function () {
+    Auth.logout().then(function(data) {
+      UI.info(data);
+      UI.go('login')
+    });
+  }
 }
 
 
@@ -86,43 +98,75 @@ function AuthCtrl ($scope, $state, Auth, UI) {
   vm.login = function () {
     console.log('AuthCtrl: ' + vm.user);
     Auth.login(vm.user).then(function (data) {
-      console.log(data);
+      UI.success('Welcome, ' + data.username);
+      $state.go('workshop');
+      $scope.$apply();
+      //console.log(data);
+    }, function (error) {
+      UI.error(error)
     })
+  };
+  vm.logout = function () {
+    Auth.logout().then(function(data) {
+      UI.info(data);
+      $state.go('login')
+    });
   }
 }
 
-function Auth($q, $http, UI) {
-
-  var user = null;
+function Auth($q, $http) {
+  var STORAGE_ID = 'papsb-system';
+  var user = {
+    authenticated: false
+  };
 
   return {
     isLogged: isLogged,
-    username: getUsername,
-    login:    login
+    getUser:  getUser,
+    login:    login,
+    logout:   logout,
+    get:      get,
+    put:      put
   };
 
   function isLogged() {
-    return user
+    return user.authenticated
   }
   function login(user) {
     return $q(function (resolve, reject) {
       $http.post('/api/login', user)
         .success(function (data) {
-          UI.papSuccess('Welcome, ' + data.username);
-          resolve(data.username)
+          user = data;
+          user.authenticated = true;
+          put(user);
+          resolve(data)
+          console.log('Auth: ' + JSON.stringify(user));
         })
         .error(function (data) {
-          UI.papError('Login Error')
           reject('login error')
         });
     })
   }
-  function getUsername() {
-    return user.username
+  function logout() {
+    return $q(function (resolve, reject) {
+      localStorage.removeItem(STORAGE_ID);
+      resolve('cleared')
+    })
+  }
+  function get() {
+    user = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+    //console.log('Auth: ' + user);
+    return user;
+  }
+  function put(user) {
+    localStorage.setItem(STORAGE_ID, JSON.stringify(user))
+  }
+  function getUser() {
+    return user
   }
 }
-UI.$inject = ['toastr'];
-function UI(toastr) {
+UI.$inject = ['$state', 'toastr'];
+function UI($state, toastr) {
   var sidebarStatus = false;
   var workshopStatus = false;
   console.log("From: UI");
@@ -132,9 +176,10 @@ function UI(toastr) {
     setSidebarStatus:   setSidebarStatus,
     getWorkshopStatus:  getWorkshopStatus,
     setWorkshopStatus:  setWorkshopStatus,
-    papError:           papError,
-    papInfo:            papInfo,
-    papSuccess:         papSuccess
+    go:                 go,
+    error:              error,
+    info:               info,
+    success:            success
   };
 
   function getSidebarStatus() {
@@ -153,21 +198,24 @@ function UI(toastr) {
     //console.log("setWorkshopStatus: " + status);
     workshopStatus = status;
   }
-  function papError(body, head) {
+  function go(state) {
+    $state.go(state)
+  }
+  function error(body, head) {
     if (head) {
       toastr.error(head, body)
     } else {
       toastr.error(body)
     }
   }
-  function papInfo(body, head) {
+  function info(body, head) {
     if (head) {
       toastr.info(head, body)
     } else {
       toastr.info(body)
     }
   }
-  function papSuccess(body, head) {
+  function success(body, head) {
     if (head) {
       toastr.success(head, body)
     } else {
