@@ -25,14 +25,34 @@ module.exports = function (passport) {
 
   // local login
   // ===========
-  passport.use('local', new LocalStrategy({
-    usernameField     : 'email',
+  passport.use('login', new LocalStrategy({
+      usernameField     : 'username',
+      passwordField     : 'password',
+      passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function (req, username, password, done) {
+
+      var user = {
+        id      : 7,
+        username: 'kuntau',
+        email   : 'kuntau17@gmail.com'
+      };
+
+      console.log('passport.auth: ' + username);
+      if (username === 'noob')
+        return done('error noob la');
+
+      return done(null, user);
+    }));
+
+  // local signup
+  // ===========
+  passport.use('signup', new LocalStrategy({
+    usernameField     : 'username',
     passwordField     : 'password',
     passReqToCallback : true // allows us to pass back the entire request to the callback
   },
   function (req, username, password, done) {
-    // body...
-  }
-  ))
-
-}
+    return done('error signup')
+  }));
+};

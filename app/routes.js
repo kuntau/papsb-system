@@ -70,11 +70,24 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('/login', function (req, res) {
-    res.sendStatus(404);
-  });
+  app.post('/api/login',
+    passport.authenticate('login', {}),
+    function (req, res) {
+      console.log('API LOGIN: ' + req.body.id + req.body.username);
+      res.json({ id: req.body.id, username: req.body.username})
+    }
+  );
 
-  app.get('/*', isLoggedIn, function(req, res) {
+  //app.post('/api/login', function (req, res) {
+  //  //res.redirect(301, '/');
+  //  console.log('API LOGIN: ' + req.body.id + req.body.name);
+  //  res.send({
+  //    id: 1,
+  //    name: 'noob'
+  //  })
+  //});
+
+  app.get('*', isLoggedIn, function(req, res) {
     res.sendFile('./public/index.html', { root: __dirname + '/..' });
   });
 
