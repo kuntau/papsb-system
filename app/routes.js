@@ -70,6 +70,13 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.get('/api/islogged', function (req, res) {
+      if (req.user) {
+        res.json(user)
+      } else res.send(401, 'User is not authenticated')
+    }
+  );
+
   app.post('/api/login',
     passport.authenticate('login', {}),
     function (req, res) {
