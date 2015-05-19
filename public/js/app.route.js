@@ -22,15 +22,14 @@ function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig) {
       event.preventDefault();
       $state.go(toState.redirectTo, toParams)
     }
-    var toastrMessage = toParams.page  ? toParams.page : 'no parameters'
-    toastr.info(fromState.url + ' --> ' + toState.url + ' #' + toastrMessage, 'State Changed!', { positionClass: 'toastr-bottom-right' })
+    var toastrMessage = toParams.page  ? ' ☆' + toParams.page : '';
+    toastr.info(fromState.url + ' ー ' + toState.url + toastrMessage)
   });
 }
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
   // $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider
-    // .when('/workshop', '/workshop.index')
     .otherwise('about'); // for any unmatched url, redirect here
 
   $stateProvider
@@ -41,11 +40,11 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       title       : 'Workshop Dashboard',
       controller  : 'WorkshopCtrl as vm',
       redirectTo  : 'workshop.overview',
-      onEnter     : function (UIService) {
-        UIService.setWorkshopStatus(true);
+      onEnter     : function (UI) {
+        UI.setWorkshopStatus(true);
       },
-      onExit     : function (UIService) {
-        UIService.setWorkshopStatus(false);
+      onExit     : function (UI) {
+        UI.setWorkshopStatus(false);
       }
     })
 
@@ -84,16 +83,6 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     })
 
-    // .state('workshop.message1', {
-    //   url         : '/message1',
-    //   templateUrl : 'views/workshop.message1.html',
-    //   title       : 'Message 1',
-    //   controller  : function ($scope, toastr) {
-    //     $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
-    //     toastr.success('The message from message 1: ' + $scope.names[2]);
-    //   }
-    // })
-    //
     .state('workshop.message2', {
       url         : '/aum/message2',
       templateUrl : 'views/workshop/workshop.message2.html',
@@ -129,9 +118,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('login', {
       url         : '/login',
       templateUrl : 'views/login.html',
-      // controller  : 'LoginCtrl'
-      controller  : function ($scope) {
-        $('#papsbLogin').modal('toggle');
-      }
+      title       : 'Login',
+      controller  : 'AuthCtrl as vm'
     });
 };
