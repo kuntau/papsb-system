@@ -11,11 +11,12 @@ angular.module('papsb')
 function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig) {
   $rootScope.$state = $state;
   $rootScope.$stateParams = $stateParams;
-    angular.extend(toastrConfig, {
-      positionClass: 'toast-bottom-right',
-      tapToDismiss: true,
-      newestOnTop: false
-    });
+  angular.extend(toastrConfig, {
+    positionClass        : 'toast-bottom-right',
+    tapToDismiss         : true,
+    newestOnTop          : false,
+    preventOpenDuplicates: true
+  });
   // monitor `state change`
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
     if (toState.redirectTo) {
@@ -23,14 +24,14 @@ function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig) {
       $state.go(toState.redirectTo, toParams)
     }
     var toastrMessage = toParams.page  ? ' ☆' + toParams.page : '';
-    toastr.info(fromState.url + ' ー ' + toState.url + toastrMessage)
+    //toastr.info(fromState.url + ' ー ' + toState.url + toastrMessage)
   });
 }
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
   // $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider
-    .otherwise('about'); // for any unmatched url, redirect here
+    .otherwise('login'); // for any unmatched url, redirect here
 
   $stateProvider
     // route for the workshop page
