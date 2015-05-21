@@ -32,17 +32,17 @@ module.exports = function (passport) {
     },
     function (req, username, password, done) {
 
-      var user = {
-        id      : 7,
-        username: 'kuntau',
-        email   : 'kuntau17@gmail.com'
-      };
+      User.findOne({ username: username }, function (err, user) {
+        if (err) return done(err);
 
-      console.log('passport.auth: ' + username);
-      if (username === 'noob')
-        return done('error noob la');
+        if (!user)
+          return done(null, false, 'User not found');
 
-      return done(null, user);
+        //if (!user.validPassword(password))
+        //  return done(null, false, 'Wrong password');
+
+        return done(null, user);
+      });
     }));
 
   // local signup
