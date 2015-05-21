@@ -70,29 +70,26 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('/api/islogged', function (req, res) {
+  app.get('/api/auth', function (req, res) {
       if (req.user) {
         res.json(user)
-      } else res.send(401, 'User is not authenticated')
+      } else res.status(401).send('User is not authenticated')
     }
   );
 
-  app.post('/api/login',
+  app.post('/api/auth/login',
     passport.authenticate('login', {}),
     function (req, res) {
-      console.log('API LOGIN: ' + req.body.id + req.body.username);
-      res.json({ id: req.body.id, username: req.body.username})
+      res.json(req.user)
     }
   );
 
-  //app.post('/api/login', function (req, res) {
-  //  //res.redirect(301, '/');
-  //  console.log('API LOGIN: ' + req.body.id + req.body.name);
-  //  res.send({
-  //    id: 1,
-  //    name: 'noob'
-  //  })
-  //});
+  app.delete('/api/auth/logout', function (req, res) {
+    if (req.user) {
+      res.send(req.user.username + ', logged out')
+      req.logout();
+    } else res.json({ error: 'You\'re not logged in' })
+  });
 
   app.get('*', isLoggedIn, function(req, res) {
     res.sendFile('./public/index.html', { root: __dirname + '/..' });

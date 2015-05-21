@@ -26,8 +26,8 @@ function ShellCtrl($scope, $state, UI, Auth) {
 
   function Activate() {
     // create a message to display in our view
-    shell.message        = 'Everyone come and see how good id look';
-    shell.sidebarStatus  = UI.getSidebarStatus;
+    shell.message = 'Everyone come and see how good id look';
+    shell.sidebarStatus = UI.getSidebarStatus;
     shell.workshopStatus = UI.getWorkshopStatus;
     shell.auth = Auth.isLogged;
     shell.user = {
@@ -45,10 +45,12 @@ function ShellCtrl($scope, $state, UI, Auth) {
   });
 
   shell.logout = function () {
-    Auth.logout().then(function(data) {
-      UI.info(data);
-      UI.go('login')
-    });
+    Auth.logout().then(function (data) {
+      UI.success(data);
+      $state.go('login')
+    }, function (error) {
+      UI.error(error)
+    })
   }
 }
 
@@ -86,31 +88,20 @@ function AuthCtrl ($scope, $state, Auth, UI) {
   vm.error = 'nuclear activated';
   vm.message = '';
   vm.user = {
-    id: 7,
-    username: 'noob',
-    password: 'yolo',
-    email: 'kuntau17@gmail.com'
+    username: 'kuntau',
+    password: 'yolo'
   };
 
   vm.reload = function () {
     $state.reload()
   };
   vm.login = function () {
-    console.log('AuthCtrl: ' + vm.user);
     Auth.login(vm.user).then(function (data) {
       UI.success('Welcome, ' + data.username);
       $state.go('workshop');
-      $scope.$apply();
-      //console.log(data);
     }, function (error) {
       UI.error(error)
     })
-  };
-  vm.logout = function () {
-    Auth.logout().then(function(data) {
-      UI.info(data);
-      $state.go('login')
-    });
   }
 }
 
@@ -122,11 +113,11 @@ function Auth($q, $http) {
 
   return {
     isLogged: isLogged,
-    getUser:  getUser,
-    login:    login,
-    logout:   logout,
-    get:      get,
-    put:      put
+    getUser : getUser,
+    login   : login,
+    logout  : logout,
+    get     : get,
+    put     : put
   };
 
   function isLogged() {
@@ -134,23 +125,31 @@ function Auth($q, $http) {
   }
   function login(user) {
     return $q(function (resolve, reject) {
-      $http.post('/api/login', user)
+      $http.post('/api/auth/login', user)
         .success(function (data) {
           user = data;
           user.authenticated = true;
           put(user);
-          resolve(data)
-          console.log('Auth: ' + JSON.stringify(user));
+          resolve(data);
         })
-        .error(function (data) {
-          reject('login error')
+        .error(function (reason) {
+          reject(reason)
         });
     })
   }
-  function logout() {
+
+  function logout () {
     return $q(function (resolve, reject) {
-      localStorage.removeItem(STORAGE_ID);
-      resolve('cleared')
+      $http.delete('/api/auth/logout', user)
+        .success(function (data) {
+          localStorage.removeItem(STORAGE_ID);
+          if (data.error)
+            return reject(data.error)
+          resolve(data)
+        })
+        .error(function (reason) {
+          reject(reason)
+        })
     })
   }
   function get() {
@@ -172,14 +171,15 @@ function UI($state, toastr) {
   console.log("From: UI");
 
   return {
-    getSidebarStatus:   getSidebarStatus,
-    setSidebarStatus:   setSidebarStatus,
-    getWorkshopStatus:  getWorkshopStatus,
-    setWorkshopStatus:  setWorkshopStatus,
-    go:                 go,
-    error:              error,
-    info:               info,
-    success:            success
+    getSidebarStatus : getSidebarStatus,
+    setSidebarStatus : setSidebarStatus,
+    getWorkshopStatus: getWorkshopStatus,
+    setWorkshopStatus: setWorkshopStatus,
+    go               : go,
+    error            : error,
+    info             : info,
+    warning          : warning,
+    success          : success
   };
 
   function getSidebarStatus() {
@@ -213,6 +213,13 @@ function UI($state, toastr) {
       toastr.info(head, body)
     } else {
       toastr.info(body)
+    }
+  }
+  function warning(body, head) {
+    if (head) {
+      toastr.warning(head, body)
+    } else {
+      toastr.warning(body)
     }
   }
   function success(body, head) {
