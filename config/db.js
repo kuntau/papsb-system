@@ -1,3 +1,3 @@
 module.exports = {
-  url : 'mongodb://localhost:27017/papsb-workshop'
-}
+  url : 'mongodb://localhost:27017/papsb-system'
+};
