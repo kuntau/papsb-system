@@ -57,11 +57,7 @@ function ShellCtrl($scope, $state, UI, Auth) {
 
 WorkshopCtrl.$inject = ['UI'];
 function WorkshopCtrl(UI) {
-  //console.log("WorkshopCtrl");
-
   var vm = this;
-
-  //console.log('WorkshopCtrl::WSStatus: ' + UI.getWorkshopStatus());
 }
 
 function AboutCtrl() {
@@ -92,9 +88,7 @@ function AuthCtrl ($scope, $state, Auth, UI) {
     password: 'yolo'
   };
 
-  vm.reload = function () {
-    $state.reload()
-  };
+  vm.reload = function () { UI.go() };
   vm.login = function () {
     Auth.login(vm.user).then(function (data) {
       UI.success('Welcome, ' + data.username);
@@ -120,12 +114,12 @@ function Auth($q, $http) {
     put     : put
   };
 
-  function isLogged() {
-    return user.authenticated
+  function isLogged(user) {
+    return $q(fun)
   }
   function login(user) {
     return $q(function (resolve, reject) {
-      $http.post('/api/auth/login', user)
+      $http.post('/api/auth', user)
         .success(function (data) {
           user = data;
           user.authenticated = true;
@@ -140,7 +134,7 @@ function Auth($q, $http) {
 
   function logout () {
     return $q(function (resolve, reject) {
-      $http.delete('/api/auth/logout', user)
+      $http.delete('/api/auth', user)
         .success(function (data) {
           localStorage.removeItem(STORAGE_ID);
           if (data.error)
@@ -164,6 +158,7 @@ function Auth($q, $http) {
     return user
   }
 }
+
 UI.$inject = ['$state', 'toastr'];
 function UI($state, toastr) {
   var sidebarStatus = false;
@@ -176,43 +171,33 @@ function UI($state, toastr) {
     getWorkshopStatus: getWorkshopStatus,
     setWorkshopStatus: setWorkshopStatus,
     go               : go,
-    error            : error,
     info             : info,
+    success          : success,
     warning          : warning,
-    success          : success
+    error            : error
   };
 
-  function getSidebarStatus() {
-    //console.log("getSidebarStatus: " + sidebarStatus);
-    return sidebarStatus;
-  }
-  function setSidebarStatus(status) {
-    //console.log("setSidebarStatus: " + status);
-    sidebarStatus = status;
-  }
-  function getWorkshopStatus() {
-    //console.log("getWorkshopStatus: " + workshopStatus);
-    return workshopStatus;
-  }
-  function setWorkshopStatus(status) {
-    //console.log("setWorkshopStatus: " + status);
-    workshopStatus = status;
-  }
+  function getSidebarStatus() { return sidebarStatus }
+  function setSidebarStatus(status) { sidebarStatus = status; }
+  function getWorkshopStatus() { return workshopStatus; }
+  function setWorkshopStatus(status) { workshopStatus = status; }
   function go(state) {
-    $state.go(state)
-  }
-  function error(body, head) {
-    if (head) {
-      toastr.error(head, body)
-    } else {
-      toastr.error(body)
-    }
+    if (state)
+      $state.go(state)
+    $state.reload()
   }
   function info(body, head) {
     if (head) {
       toastr.info(head, body)
     } else {
       toastr.info(body)
+    }
+  }
+  function success(body, head) {
+    if (head) {
+      toastr.success(head, body)
+    } else {
+      toastr.success(body)
     }
   }
   function warning(body, head) {
@@ -222,12 +207,10 @@ function UI($state, toastr) {
       toastr.warning(body)
     }
   }
-  function success(body, head) {
-    if (head) {
-      toastr.success(head, body)
-    } else {
-      toastr.success(body)
-    }
+  function error(body, head) {
+    if (head)
+      toastr.error(head, body)
+    toastr.error(body)
   }
 }
 
