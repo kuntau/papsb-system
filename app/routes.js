@@ -34,7 +34,7 @@ module.exports = function(app, passport) {
     if (req.user) {
       res.send(req.user.username + ', logged out')
       req.logout();
-    } else res.json({ error: 'You\'re not logged in' })
+    } else res.status(400).json({ error: 'You\'re not logged in' })
   });
 
   app.get('*', isLoggedIn, function(req, res) {
