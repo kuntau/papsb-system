@@ -30,10 +30,7 @@ function ShellCtrl($scope, $state, UI, Auth) {
     shell.sidebarStatus = UI.getSidebarStatus;
     shell.workshopStatus = UI.getWorkshopStatus;
     shell.auth = Auth.isLogged;
-    shell.user = {
-      //authenticated: Auth.isLogged
-    };
-
+    shell.user = Auth.getUser;
     //console.log('ShellCtrl: Activate ' +  shell.user.authenticated);
     Auth.get();
     //shell.user = Auth.getUser();
@@ -43,6 +40,11 @@ function ShellCtrl($scope, $state, UI, Auth) {
     shell.user = Auth.getUser();
     //console.log('ShellCtrl::Watch::WSStatus: ' + shell.workshopStatus);
   });
+
+  shell.ui = {
+    state: UI.getCurrentState,
+    sidebar: UI.getSidebarStatus
+  };
 
   shell.logout = function () {
     Auth.logout().then(function (data) {
@@ -92,7 +94,7 @@ function AuthCtrl ($scope, $state, Auth, UI) {
   vm.login = function () {
     Auth.login(vm.user).then(function (data) {
       UI.success('Welcome, ' + data.username);
-      $state.go('workshop');
+      UI.go('workshop');
     }, function (error) {
       UI.error(error)
     })
@@ -115,7 +117,7 @@ function Auth($q, $http) {
   };
 
   function isLogged(user) {
-    return $q(fun)
+    return
   }
   function login(user) {
     return $q(function (resolve, reject) {
@@ -163,6 +165,7 @@ UI.$inject = ['$state', 'toastr'];
 function UI($state, toastr) {
   var sidebarStatus = false;
   var workshopStatus = false;
+  var currentState;
   console.log("From: UI");
 
   return {
@@ -170,6 +173,8 @@ function UI($state, toastr) {
     setSidebarStatus : setSidebarStatus,
     getWorkshopStatus: getWorkshopStatus,
     setWorkshopStatus: setWorkshopStatus,
+    getCurrentState  : getCurrentState,
+    setCurrentState  : setCurrentState,
     go               : go,
     info             : info,
     success          : success,
@@ -181,6 +186,11 @@ function UI($state, toastr) {
   function setSidebarStatus(status) { sidebarStatus = status; }
   function getWorkshopStatus() { return workshopStatus; }
   function setWorkshopStatus(status) { workshopStatus = status; }
+  function getCurrentState() {
+    // console.log( 'state: '  + JSON.stringify( currentState ) );
+    return currentState.name
+  }
+  function setCurrentState(name) { currentState = name; }
   function go(state) {
     if (state)
       $state.go(state)
@@ -213,4 +223,3 @@ function UI($state, toastr) {
     toastr.error(body)
   }
 }
-
