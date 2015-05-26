@@ -33,13 +33,12 @@ module.exports = function (passport) {
     function (req, username, password, done) {
 
       User.findOne({ username: username }, function (err, user) {
-        if (err) return done('oh yes');
-
+        if (err)
+          return done('oh yes');
         if (!user)
-          return done(null, false, 'User not found');
-
-        //if (!user.validPassword(password))
-        //  return done(null, false, 'Wrong password');
+          return done(null, false, { message: 'User not found' });
+        if (!user.validPassword(password))
+          return done(null, false, { error: 'Wrong password' });
 
         return done(null, user);
       });
