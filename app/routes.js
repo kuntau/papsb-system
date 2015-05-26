@@ -19,21 +19,23 @@ module.exports = function(app, passport) {
   app.get('/api/auth', isLoggedIn, function (req, res) {
       if (req.user) {
         res.json(user)
-      } else res.json({ error: 'User is not authenticated' })
+      } else {
+        res.status(401).send({ error: 'User is not authenticated' })
+      }
     }
   );
 
-  app.post('/api/auth',
-    passport.authenticate('login', {}),
-    function (req, res) {
-      res.json(req.user)
+  app.post('/api/auth', passport.authenticate('login'), function (req, res) {
+      if (req.user) {
+        res.json(req.user)
+      } else res.status(403).send({ error: 'Login error'})
     }
   );
 
   app.delete('/api/auth', function (req, res) {
     if (req.user) {
-      res.send(req.user.username + ', logged out')
-      req.logout();
+      res.send(req.user.username + ', logged out');
+      req.logout()
     } else res.status(400).json({ error: 'You\'re not logged in' })
   });
 

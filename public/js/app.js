@@ -36,10 +36,10 @@ function ShellCtrl($scope, $state, UI, Auth) {
     //shell.user = Auth.getUser();
   }
 
-  $scope.$watch(Auth.isLogged, function () {
-    shell.user = Auth.getUser();
-    //console.log('ShellCtrl::Watch::WSStatus: ' + shell.workshopStatus);
-  });
+  // $scope.$watch(Auth.isLogged, function () {
+  //   shell.user = Auth.getUser();
+  //   //console.log('ShellCtrl::Watch::WSStatus: ' + shell.workshopStatus);
+  // });
 
   shell.ui = {
     state: UI.getCurrentState,
@@ -49,9 +49,10 @@ function ShellCtrl($scope, $state, UI, Auth) {
   shell.logout = function () {
     Auth.logout().then(function (data) {
       UI.success(data);
-      $state.go('login')
-    }, function (error) {
-      UI.error(error)
+      shell.user = null;
+      UI.go('login')
+    }, function (data) {
+      UI.error(data.error)
     })
   }
 }
@@ -117,7 +118,7 @@ function Auth($q, $http) {
   };
 
   function isLogged(user) {
-    return
+    return false
   }
   function login(user) {
     return $q(function (resolve, reject) {
@@ -128,23 +129,26 @@ function Auth($q, $http) {
           put(user);
           resolve(data);
         })
-        .error(function (reason) {
-          reject(reason)
+        .error(function (data) {
+          console.log('LOGIn: ' + JSON.stringify(data));
+          reject(data)
         });
     })
   }
 
   function logout () {
     return $q(function (resolve, reject) {
+      console.log('MOREB4: ' + JSON.stringify(user));
       $http.delete('/api/auth', user)
         .success(function (data) {
           localStorage.removeItem(STORAGE_ID);
-          if (data.error)
-            return reject(data.error)
+          console.log('B4: ' + JSON.stringify(user));
+          user = null;
+          console.log('After: ' + JSON.stringify(user));
           resolve(data)
         })
-        .error(function (reason) {
-          reject(reason)
+        .error(function (data) {
+          reject(data)
         })
     })
   }
@@ -192,9 +196,9 @@ function UI($state, toastr) {
   }
   function setCurrentState(name) { currentState = name; }
   function go(state) {
-    if (state)
+    if (state) {
       $state.go(state)
-    $state.reload()
+    } else $state.reload()
   }
   function info(body, head) {
     if (head) {
