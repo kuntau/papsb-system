@@ -34,8 +34,8 @@ module.exports = function(app, passport) {
 
   app.delete('/api/auth', function (req, res) {
     if (req.user) {
-      res.send(req.user.username + ', logged out');
-      req.logout()
+      req.logOut();
+      res.send('Logged out')
     } else res.status(400).json({ error: 'You\'re not logged in' })
   });
 
