@@ -29,27 +29,53 @@ function ShellCtrl($scope, $state, UI, Auth) {
     shell.message = 'Everyone come and see how good id look';
     shell.sidebarStatus = UI.getSidebarStatus;
     shell.workshopStatus = UI.getWorkshopStatus;
-    shell.auth = Auth.isLogged;
-    shell.user = Auth.getUser;
+    shell.loginForm = {
+      username: 'kuntau',
+      password: 'kunkun'
+    };
     //console.log('ShellCtrl: Activate ' +  shell.user.authenticated);
     Auth.get();
-    //shell.user = Auth.getUser();
+    shell.user = Auth.getUser();
+    isLogged();
   }
+  //if (shell.user.username) { isLogged(); }
 
-  // $scope.$watch(Auth.isLogged, function () {
-  //   shell.user = Auth.getUser();
-  //   //console.log('ShellCtrl::Watch::WSStatus: ' + shell.workshopStatus);
-  // });
+   //$scope.$watch(shell.auth, function () {
+   //  shell.auth = Auth.isLogged
+   //  //shell.user = Auth.getUser();
+   //  //console.log('ShellCtrl::Watch::WSStatus: ' + shell.workshopStatus);
+   //});
 
   shell.ui = {
     state: UI.getCurrentState,
     sidebar: UI.getSidebarStatus
   };
 
+  function isLogged() {
+    Auth.isLogged().then(function (data) {
+      shell.user.authenticated = true;
+      UI.success('is Logged')
+    }, function (data) {
+      shell.user.authenticated = false;
+      UI.error(data)
+    })
+  }
+
+  shell.login = function () {
+    Auth.login(shell.loginForm).then(function (data) {
+      shell.user.authenticated = true;
+      UI.success('Welcome, ' + data.username);
+      UI.go('workshop');
+    }, function (error) {
+      shell.user.authenticated = false;
+      UI.error(error)
+    })
+  };
+
   shell.logout = function () {
     Auth.logout().then(function (data) {
       UI.success(data);
-      shell.user = null;
+      shell.user = {};
       UI.go('login')
     }, function (data) {
       UI.error(data.error)
@@ -88,7 +114,7 @@ function AuthCtrl ($scope, $state, Auth, UI) {
   vm.message = '';
   vm.user = {
     username: 'kuntau',
-    password: 'yolo'
+    password: 'kunkun'
   };
 
   vm.reload = function () { UI.go() };
@@ -117,8 +143,16 @@ function Auth($q, $http) {
     put     : put
   };
 
-  function isLogged(user) {
-    return false
+  function isLogged() {
+    return $q(function (resolve, reject) {
+      $http.get('/api/auth')
+        .success(function (data) {
+          resolve(data)
+        })
+        .error(function (data) {
+          reject(data.error)
+        })
+    })
   }
   function login(user) {
     return $q(function (resolve, reject) {
@@ -130,7 +164,6 @@ function Auth($q, $http) {
           resolve(data);
         })
         .error(function (data) {
-          console.log('LOGIn: ' + JSON.stringify(data));
           reject(data)
         });
     })
@@ -138,13 +171,10 @@ function Auth($q, $http) {
 
   function logout () {
     return $q(function (resolve, reject) {
-      console.log('MOREB4: ' + JSON.stringify(user));
       $http.delete('/api/auth', user)
         .success(function (data) {
           localStorage.removeItem(STORAGE_ID);
-          console.log('B4: ' + JSON.stringify(user));
           user = null;
-          console.log('After: ' + JSON.stringify(user));
           resolve(data)
         })
         .error(function (data) {
@@ -154,7 +184,7 @@ function Auth($q, $http) {
   }
   function get() {
     user = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
-    //console.log('Auth: ' + user);
+    console.log('Auth: ' + JSON.stringify(user));
     return user;
   }
   function put(user) {

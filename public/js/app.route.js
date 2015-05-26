@@ -22,7 +22,7 @@ function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig, UI) 
     if (toState.redirectTo) {
       event.preventDefault();
       $state.go(toState.redirectTo, toParams)
-    };
+    }
     // set UI state
     UI.setCurrentState(toState);
     var toastrMessage = toParams.page  ? ' ☆' + toParams.page : '';
@@ -113,7 +113,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('login', {
       url         : '/login',
       templateUrl : 'views/login.html',
-      title       : 'Login',
-      controller  : 'AuthCtrl as vm'
+      title       : 'Login'
+      //controller  : 'AuthCtrl as vm'
     });
 };

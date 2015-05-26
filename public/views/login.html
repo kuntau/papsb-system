@@ -5,14 +5,14 @@
     <div class="col-xs-6 col-xs-offset-3 auth-form">
 
       <h2><i class="fa fa-sign-in"></i> Login</h2>
-      <form ng-submit="vm.login()" role="form">
+      <form ng-submit="shell.login()" role="form">
         <div class="form-group">
           <label>Username</label>
-          <input class="form-control" ng-model="vm.user.username" placeholder="Enter username" type="text"/>
+          <input class="form-control" ng-model="shell.loginForm.username" placeholder="Enter username" type="text"/>
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input class="form-control" ng-model="vm.user.password" placeholder="Enter password" type="password"/>
+          <input class="form-control" ng-model="shell.loginForm.password" placeholder="Enter password" type="password"/>
         </div>
         <div class="checkbox"><label><input type="checkbox" />Remember me</label></div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -20,9 +20,9 @@
     </div>
     <div class="col-xs-6 col-xs-offset-3 auth-info">
         <p>
-          Need an account? <a href="#">Singup</a><br/>
-          Forget password? <a href="#">Recover</a><br/>
-          Reload page? <a href="#" ng-click="vm.reload()">{{ ::vm.error }}</a>
+          Need an account? <a href="#">Signup</a><br/>
+          Forget password? <a href="recover" ng-click="shell.isLogged()">Recover</a><br/>
+          Reload page? <a href="reload" ng-click="shell.reload()">{{ ::shell.error }}</a>
         </p>
     </div>
   </div>
