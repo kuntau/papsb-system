@@ -1,0 +1,70 @@
+/* shades of gray
+
+#2B292A
+
+*/
+@require 'variables'
+
+body
+  background rgb(254, 254, 254)
+  /*background #2B292A*/
+  padding-top 70px
+  font-family $font-proxima
+  font-weight normal
+
+h1, h2, h3, h4, h5, h6
+  font-family $font-gotham
+  text-transform uppercase
+
+#spinner
+  display none
+
+.main
+  padding 20px
+
+@media (min-width: 768px)
+  .main
+    padding-right 40px
+    padding-left 40px
+
+.main .page-header
+  margin-top 0
+
+.main .sub-header
+  padding-bottom 10px
+  border-bottom 1px solid $silver
+
+
+/*
+ * utilities class
+ * TODO: When overwhelmed, extract to separate file
+ */
+
+.auth-form
+  margin-top 70px
+  padding 50px
+  //border solid 1px $silver
+  border-radius 1em
+  box-shadow $silver 0 0 3px
+  background-color $clouds
+
+.auth-info
+  padding 10px 0 0 50px
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders
+  margin-bottom 30px
+  text-align center
+
+.placeholders h4
+  margin-bottom 0
+
+.placeholder
+  margin-bottom 20px
+
+.placeholder img
+  display inline-block
+  border-radius 50%

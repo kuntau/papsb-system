@@ -1,0 +1,259 @@
+// public/js/app.js
+'use strict';
+
+// create the module and name it papsb
+angular
+  .module('papsb', [
+          'ui.bootstrap',
+          'ui.router',
+          'ngAnimate',
+          'toastr',
+          ])
+  .controller('ShellCtrl', ShellCtrl)
+  .controller('WorkshopCtrl', WorkshopCtrl)
+  .controller('AboutCtrl', AboutCtrl)
+  .controller('ContactCtrl', ContactCtrl)
+  .controller('AuthCtrl', AuthCtrl)
+  .directive('bsHolder', bsHolder)
+  .factory('Auth', Auth)
+  .factory('UI', UI);
+
+ShellCtrl.$inject = ['$scope', '$state','UI', 'Auth'];
+function ShellCtrl($scope, $state, UI, Auth) {
+  console.log("From: ShellCtrl");
+  var shell = this;
+  Activate();
+
+  function Activate() {
+    // create a message to display in our view
+    shell.message = 'Everyone come and see how good id look';
+    shell.sidebarStatus = UI.getSidebarStatus;
+    shell.workshopStatus = UI.getWorkshopStatus;
+    shell.loginForm = {
+      username: 'kuntau',
+      password: 'kunkun'
+    };
+    //console.log('ShellCtrl: Activate ' +  shell.user.authenticated);
+    Auth.get();
+    shell.user = Auth.getUser();
+    isLogged();
+  }
+  //if (shell.user.username) { isLogged(); }
+
+   //$scope.$watch(shell.auth, function () {
+   //  shell.auth = Auth.isLogged
+   //  //shell.user = Auth.getUser();
+   //  //console.log('ShellCtrl::Watch::WSStatus: ' + shell.workshopStatus);
+   //});
+
+  shell.ui = {
+    state: UI.getCurrentState,
+    sidebar: UI.getSidebarStatus
+  };
+
+  function isLogged() {
+    Auth.isLogged().then(function (data) {
+      shell.user.authenticated = true;
+      UI.success('is Logged')
+    }, function (data) {
+      shell.user.authenticated = false;
+      UI.error(data)
+    })
+  }
+
+  shell.login = function () {
+    Auth.login(shell.loginForm).then(function (data) {
+      shell.user.authenticated = true;
+      UI.success('Welcome, ' + data.username);
+      UI.go('workshop');
+    }, function (error) {
+      shell.user.authenticated = false;
+      UI.error(error)
+    })
+  };
+
+  shell.logout = function () {
+    Auth.logout().then(function (data) {
+      UI.success(data);
+      shell.user = {};
+      UI.go('login')
+    }, function (data) {
+      UI.error(data.error)
+    })
+  }
+}
+
+
+WorkshopCtrl.$inject = ['UI'];
+function WorkshopCtrl(UI) {
+  var vm = this;
+}
+
+function AboutCtrl() {
+  var vm = this;
+  vm.message = 'This is about page!';
+}
+
+function ContactCtrl() {
+  var vm = this;
+  vm.message = 'You now can contact us!!';
+}
+
+function bsHolder() {
+  return {
+    link: function (scope, el, attr) {
+      Holder.run(el);
+    }
+  };
+}
+
+function AuthCtrl ($scope, $state, Auth, UI) {
+  var vm = this;
+  vm.giggle = 'noob';
+  vm.error = 'nuclear activated';
+  vm.message = '';
+  vm.user = {
+    username: 'kuntau',
+    password: 'kunkun'
+  };
+
+  vm.reload = function () { UI.go() };
+  vm.login = function () {
+    Auth.login(vm.user).then(function (data) {
+      UI.success('Welcome, ' + data.username);
+      UI.go('workshop');
+    }, function (error) {
+      UI.error(error)
+    })
+  }
+}
+
+function Auth($q, $http) {
+  var STORAGE_ID = 'papsb-system';
+  var user = {
+    authenticated: false
+  };
+
+  return {
+    isLogged: isLogged,
+    getUser : getUser,
+    login   : login,
+    logout  : logout,
+    get     : get,
+    put     : put
+  };
+
+  function isLogged() {
+    return $q(function (resolve, reject) {
+      $http.get('/api/auth')
+        .success(function (data) {
+          resolve(data)
+        })
+        .error(function (data) {
+          reject(data.error)
+        })
+    })
+  }
+  function login(user) {
+    return $q(function (resolve, reject) {
+      $http.post('/api/auth', user)
+        .success(function (data) {
+          user = data;
+          user.authenticated = true;
+          put(user);
+          resolve(data);
+        })
+        .error(function (data) {
+          reject(data)
+        });
+    })
+  }
+
+  function logout () {
+    return $q(function (resolve, reject) {
+      $http.delete('/api/auth', user)
+        .success(function (data) {
+          localStorage.removeItem(STORAGE_ID);
+          user = null;
+          resolve(data)
+        })
+        .error(function (data) {
+          reject(data)
+        })
+    })
+  }
+  function get() {
+    user = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+    console.log('Auth: ' + JSON.stringify(user));
+    return user;
+  }
+  function put(user) {
+    localStorage.setItem(STORAGE_ID, JSON.stringify(user))
+  }
+  function getUser() {
+    return user
+  }
+}
+
+UI.$inject = ['$state', 'toastr'];
+function UI($state, toastr) {
+  var sidebarStatus = false;
+  var workshopStatus = false;
+  var currentState;
+  console.log("From: UI");
+
+  return {
+    getSidebarStatus : getSidebarStatus,
+    setSidebarStatus : setSidebarStatus,
+    getWorkshopStatus: getWorkshopStatus,
+    setWorkshopStatus: setWorkshopStatus,
+    getCurrentState  : getCurrentState,
+    setCurrentState  : setCurrentState,
+    go               : go,
+    info             : info,
+    success          : success,
+    warning          : warning,
+    error            : error
+  };
+
+  function getSidebarStatus() { return sidebarStatus }
+  function setSidebarStatus(status) { sidebarStatus = status; }
+  function getWorkshopStatus() { return workshopStatus; }
+  function setWorkshopStatus(status) { workshopStatus = status; }
+  function getCurrentState() {
+    // console.log( 'state: '  + JSON.stringify( currentState ) );
+    return currentState.name
+  }
+  function setCurrentState(name) { currentState = name; }
+  function go(state) {
+    if (state) {
+      $state.go(state)
+    } else $state.reload()
+  }
+  function info(body, head) {
+    if (head) {
+      toastr.info(head, body)
+    } else {
+      toastr.info(body)
+    }
+  }
+  function success(body, head) {
+    if (head) {
+      toastr.success(head, body)
+    } else {
+      toastr.success(body)
+    }
+  }
+  function warning(body, head) {
+    if (head) {
+      toastr.warning(head, body)
+    } else {
+      toastr.warning(body)
+    }
+  }
+  function error(body, head) {
+    if (head)
+      toastr.error(head, body)
+    toastr.error(body)
+  }
+}

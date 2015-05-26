@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="papsb">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+
+  <title data-ng-bind="'PAPSB - ' + $state.current.title">PAPSB - Workshop Module</title>
+
+  <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="libs/angular-toastr/dist/angular-toastr.min.css"/>
+  <link rel="stylesheet" href="css/main.animation.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .ng-hide {
+      display: none!important;
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- it is important to remember all template's path need to be double quoted-->
+  <data-ng-include src="'views/shell.html'"></data-ng-include>
+
+  <!-- vendors:start -->
+  <script src="libs/angular/angular.js"></script>
+  <script src="libs/angular-animate/angular-animate.min.js"></script>
+  <script src="libs/jquery/dist/jquery.min.js"></script>
+  <script src="libs/angular-ui-bootstrap-bower/ui-bootstrap.min.js"></script>
+  <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="libs/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <!-- vendors:end -->
+
+  <!-- bootstrap:start-->
+  <!-- <script src="js/workshop/app.js"></script> -->
+  <!-- <script src="js/workshop/app.route.js"></script> -->
+  <!-- bootstrap:end-->
+
+  <!-- bootstrap:start-->
+  <script src="js/app.js"></script>
+  <script src="js/app.route.js"></script>
+  <!-- bootstrap:end-->
+
+  <!--<script src="js/controllers/mainCtrl.js"></script>-->
+  <!-- <script src="js/controllers/loginCtrl.js"></script> -->
+
+  <!-- dev:start -->
+  <script src="libs/Faker/build/build/faker.min.js"></script>
+  <script src="libs/holderjs/holder.min.js"></script>
+  <script>
+    var url = '<script src=\"http:\/\/'
+            + window.location.hostname
+            + ':35729\/livereload.js?snipver=1\"><\/script>';
+    document.write(url);
+  </script>
+  <!-- dev:end -->
+</body>
+</html>

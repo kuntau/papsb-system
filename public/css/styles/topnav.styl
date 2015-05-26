@@ -1,0 +1,55 @@
+/**
+* TOPNAV styling
+*/
+
+@require 'variables'
+
+.navbar-default
+  -webkit-box-shadow 0 1px 1px rgba(0,0,0,.1)
+  box-shadow 0 1px 1px rgba(0,0,0,.1)
+  background $topnavbgcolor
+  height 70px
+  margin-bottom 0
+
+.navbar-header button
+  margin-top 18px
+  margin-bottom 18px
+
+.navbar-nav > li > a,
+.navbar-brand
+  font-size 14px
+  height 70px
+  line-height 70px
+  text-transform uppercase
+  padding 0 20px
+
+.navbar-brand
+  font-family $font-gotham
+  font-weight 700
+  font-size 16px
+  color $topnavbrandcolor
+
+.navbar-default .navbar-nav li > a:hover,
+.navbar-default .navbar-nav li.active > a
+.navbar-default .navbar-nav li.active a:focus,
+.navbar-default .navbar-nav li.active a:hover
+  color $topnavhovercolor
+  background $topnavbghovercolor
+  cursor pointer
+
+.navbar-default .navbar-nav a
+  color $topnavcolor
+  background-color $topnavbgcolor
+
+.navbar-default .navbar-header a
+  color $topnavbrandcolor
+
+.navbar-default .nav.navbar-nav.navbar-right
+  margin-right 0
+
+.navbar-nav a .fa
+  margin-right 5px
+
+.navbar-fixed-top
+  border 0
+
