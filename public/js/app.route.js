@@ -31,9 +31,9 @@ function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig, UI) 
 }
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
-  // $locationProvider.html5Mode(true).hashPrefix('!');
+  $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider
-    .otherwise('login'); // for any unmatched url, redirect here
+    .otherwise('/login'); // for any unmatched url, redirect here
 
   $stateProvider
     // route for the workshop page
@@ -43,8 +43,6 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       title       : 'Workshop Dashboard',
       controller  : 'WorkshopCtrl as vm',
       redirectTo  : 'workshop.overview'
-      // onEnter     : function (UI) { UI.setWorkshopStatus(true); },
-      // onExit     : function (UI) { UI.setWorkshopStatus(false); }
     })
 
     .state('workshop.overview', {

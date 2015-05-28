@@ -7,13 +7,12 @@ angular
           'ui.bootstrap',
           'ui.router',
           'ngAnimate',
-          'toastr',
+          'toastr'
           ])
   .controller('ShellCtrl', ShellCtrl)
   .controller('WorkshopCtrl', WorkshopCtrl)
   .controller('AboutCtrl', AboutCtrl)
   .controller('ContactCtrl', ContactCtrl)
-  .controller('AuthCtrl', AuthCtrl)
   .directive('bsHolder', bsHolder)
   .factory('Auth', Auth)
   .factory('UI', UI);
@@ -21,18 +20,19 @@ angular
 ShellCtrl.$inject = ['$scope', '$state','UI', 'Auth'];
 function ShellCtrl($scope, $state, UI, Auth) {
   console.log("From: ShellCtrl");
-  var shell = this;
+  var shell            = this;
   // core variable
-  shell.sidebarStatus = UI.getSidebarStatus;
+  shell.sidebarStatus  = UI.getSidebarStatus;
   shell.workshopStatus = UI.getWorkshopStatus;
-  shell.isLogged = isLogged;
-  shell.login = login;
-  shell.logout = logout;
-  shell.ui = { state: UI.getCurrentState, sidebar: UI.getSidebarStatus };
-  shell.user = {};
+  shell.isLogged       = isLogged;
+  shell.login          = login;
+  shell.logout         = logout;
+  shell.reload         = reload;
+  shell.ui             = {state: UI.getCurrentState, sidebar: UI.getSidebarStatus};
+  shell.user           = {};
   // temp variable
-  shell.loginForm = { username: 'kuntau', password: 'kunkun' };
-  shell.message = 'Everyone come and see how good id look';
+  shell.loginForm      = { username: 'kuntau', password: 'kunkun' };
+  shell.message        = 'Everyone come and see how good id look';
 
   activate();
 
@@ -62,7 +62,7 @@ function ShellCtrl($scope, $state, UI, Auth) {
       shell.user.authenticated = false;
       UI.error(error)
     })
-  };
+  }
 
   function logout() {
     Auth.logout().then(function (data) {
@@ -73,6 +73,7 @@ function ShellCtrl($scope, $state, UI, Auth) {
       UI.error(data.error)
     })
   }
+  function reload() { UI.go() }
 }
 
 
@@ -99,27 +100,6 @@ function bsHolder() {
   };
 }
 
-function AuthCtrl ($scope, $state, Auth, UI) {
-  var vm = this;
-  vm.giggle = 'noob';
-  vm.error = 'nuclear activated';
-  vm.message = '';
-  vm.user = {
-    username: 'kuntau',
-    password: 'kunkun'
-  };
-
-  vm.reload = function () { UI.go() };
-  vm.login = function () {
-    Auth.login(vm.user).then(function (data) {
-      UI.success('Welcome, ' + data.username);
-      UI.go('workshop');
-    }, function (error) {
-      UI.error(error)
-    })
-  }
-}
-
 function Auth($q, $http) {
   var STORAGE_ID = 'papsb-system';
   var user = { authenticated: false };
@@ -139,8 +119,8 @@ function Auth($q, $http) {
         .success(function (data) {
           resolve(data)
         })
-        .error(function (data) {
-          reject(data.error)
+        .error(function (error) {
+          reject(error.error)
         })
     })
   }
@@ -154,6 +134,7 @@ function Auth($q, $http) {
           resolve(data);
         })
         .error(function (data) {
+          user = {};
           user.authenticated = false;
           reject(data)
         });
