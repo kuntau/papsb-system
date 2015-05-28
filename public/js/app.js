@@ -22,34 +22,26 @@ ShellCtrl.$inject = ['$scope', '$state','UI', 'Auth'];
 function ShellCtrl($scope, $state, UI, Auth) {
   console.log("From: ShellCtrl");
   var shell = this;
-  Activate();
+  // core variable
+  shell.sidebarStatus = UI.getSidebarStatus;
+  shell.workshopStatus = UI.getWorkshopStatus;
+  shell.isLogged = isLogged;
+  shell.login = login;
+  shell.logout = logout;
+  shell.ui = { state: UI.getCurrentState, sidebar: UI.getSidebarStatus };
+  shell.user = {};
+  // temp variable
+  shell.loginForm = { username: 'kuntau', password: 'kunkun' };
+  shell.message = 'Everyone come and see how good id look';
 
-  function Activate() {
-    // create a message to display in our view
-    shell.message = 'Everyone come and see how good id look';
-    shell.sidebarStatus = UI.getSidebarStatus;
-    shell.workshopStatus = UI.getWorkshopStatus;
-    shell.loginForm = {
-      username: 'kuntau',
-      password: 'kunkun'
-    };
-    //console.log('ShellCtrl: Activate ' +  shell.user.authenticated);
-    Auth.get();
-    shell.user = Auth.getUser();
+  activate();
+
+  function activate() {
+    Auth.get(); /* load previous user from localStorage */
+    shell.user = Auth.getUser(); /* pupulate our local user object */
     isLogged();
   }
-  //if (shell.user.username) { isLogged(); }
 
-   //$scope.$watch(shell.auth, function () {
-   //  shell.auth = Auth.isLogged
-   //  //shell.user = Auth.getUser();
-   //  //console.log('ShellCtrl::Watch::WSStatus: ' + shell.workshopStatus);
-   //});
-
-  shell.ui = {
-    state: UI.getCurrentState,
-    sidebar: UI.getSidebarStatus
-  };
 
   function isLogged() {
     Auth.isLogged().then(function (data) {
@@ -61,9 +53,9 @@ function ShellCtrl($scope, $state, UI, Auth) {
     })
   }
 
-  shell.login = function () {
+  function login() {
     Auth.login(shell.loginForm).then(function (data) {
-      shell.user.authenticated = true;
+      shell.user = data;
       UI.success('Welcome, ' + data.username);
       UI.go('workshop');
     }, function (error) {
@@ -72,7 +64,7 @@ function ShellCtrl($scope, $state, UI, Auth) {
     })
   };
 
-  shell.logout = function () {
+  function logout() {
     Auth.logout().then(function (data) {
       UI.success(data);
       shell.user = {};
@@ -130,9 +122,7 @@ function AuthCtrl ($scope, $state, Auth, UI) {
 
 function Auth($q, $http) {
   var STORAGE_ID = 'papsb-system';
-  var user = {
-    authenticated: false
-  };
+  var user = { authenticated: false };
 
   return {
     isLogged: isLogged,
@@ -164,6 +154,7 @@ function Auth($q, $http) {
           resolve(data);
         })
         .error(function (data) {
+          user.authenticated = false;
           reject(data)
         });
     })
@@ -174,7 +165,7 @@ function Auth($q, $http) {
       $http.delete('/api/auth', user)
         .success(function (data) {
           localStorage.removeItem(STORAGE_ID);
-          user = null;
+          user = {};
           resolve(data)
         })
         .error(function (data) {
@@ -183,7 +174,7 @@ function Auth($q, $http) {
     })
   }
   function get() {
-    user = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+    user = JSON.parse(localStorage.getItem(STORAGE_ID) || '{}');
     console.log('Auth: ' + JSON.stringify(user));
     return user;
   }
