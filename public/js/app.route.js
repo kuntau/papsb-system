@@ -31,7 +31,7 @@ function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig, UI) 
 }
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
-  $locationProvider.html5Mode(true).hashPrefix('!');
+  // $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider
     .otherwise('login'); // for any unmatched url, redirect here
 

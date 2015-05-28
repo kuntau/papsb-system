@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a ui-sref="login" class="navbar-brand"><i class="fa fa-home fa-lg"></i> {{ shell.user.authenticated }} internal</a>
+      <a ui-sref="login" class="navbar-brand"><i class="fa fa-home fa-lg"></i> {{ shell.user.authenticated || 'none' }} internal</a>
     </div>
 
     <div class="collapse navbar-collapse" id="topnav">
@@ -19,8 +19,8 @@
       <ul class="nav navbar-nav navbar-right">
         <li ng-if="shell.ui.state().split('.')[0] == 'workshop'"><a ng-click="shell.sidebarToggle()"><i class="fa fa-adn"></i>w
           <span class="badge">{{shell.sidebarStatus() ? 'ON' : 'OFF'}}</span></a></li>
-        <li ng-if="shell.user.authenticated == false && shell.ui.state() != 'login'"><a ui-sref="login" ><i class="fa fa-sign-in"></i>LogIn</a></li>
-        <li ng-if="shell.user.authenticated == true"><a ng-click="shell.logout()" ><i class="fa fa-sign-out"></i>Hello {{ shell.user.username }}</a></li>
+        <li ng-if="shell.user.authenticated == false && shell.ui.state() != 'login'"><a ui-sref="login" ><i class="fa fa-sign-in"></i> Login</a></li>
+        <li ng-if="shell.user.authenticated == true"><a ng-click="shell.logout()" ><i class="fa fa-sign-out"></i> {{ shell.user.username }}</a></li>
       </ul>
     </div><!-- collapse -->
   </div><!-- container-fluid -->
