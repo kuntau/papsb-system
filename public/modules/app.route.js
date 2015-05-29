@@ -39,7 +39,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
     // route for the workshop page
     .state('workshop', {
       url         : '/workshop',
-      templateUrl : 'views/workshop/workshop.html',
+      templateUrl : 'workshop/views/workshop.html',
       title       : 'Workshop Dashboard',
       controller  : 'WorkshopCtrl as vm',
       redirectTo  : 'workshop.overview'
@@ -47,13 +47,13 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     .state('workshop.overview', {
       url         : '/overview',
-      templateUrl : 'views/workshop/workshop.overview.html',
+      templateUrl : 'workshop/views/workshop.overview.html',
       title       : 'Overview',
     })
 
     .state('workshop.message1', {
       url         : '/:page',
-      templateUrl : 'views/workshop/workshop.message1.html',
+      templateUrl : 'workshop/views/workshop.message1.html',
       title       : 'Message 1',
       controller  : function ($scope, $stateParams, toastr, getTitle) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
@@ -80,7 +80,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     .state('workshop.message2', {
       url         : '/aum/message2',
-      templateUrl : 'views/workshop/workshop.message2.html',
+      templateUrl : 'workshop/views/workshop.message2.html',
       title       : 'Message 2',
       controller  : function ($scope, toastr) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
@@ -89,14 +89,14 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     .state('about', {
       url         : '/about',
-      templateUrl : 'views/about.html',
+      templateUrl : 'core/views/about.html',
       controller  : 'AboutCtrl as vm',
       title       : 'About Us'
     })
 
     .state('contact', {
       url         : '/contact',
-      templateUrl : 'views/contact.html',
+      templateUrl : 'core/views/contact.html',
       controller  : 'ContactCtrl as vm',
       title       : 'Contact Us',
       resolve     : {
@@ -110,7 +110,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     .state('login', {
       url         : '/login',
-      templateUrl : 'views/login.html',
+      templateUrl : 'core/views/login.html',
       title       : 'Login'
       //controller  : 'AuthCtrl as vm'
     });

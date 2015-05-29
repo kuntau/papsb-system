@@ -3,7 +3,7 @@
 
 // create the module and name it papsb
 angular
-  .module('papsb', [
+  .module('papsb.core', [
           'ui.bootstrap',
           'ui.router',
           'ngAnimate',
