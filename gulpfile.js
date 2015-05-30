@@ -46,15 +46,15 @@ gulp.task('css', function () {
   var stylusFiler = filter('**/*.styl');
 
   return gulp.src([
-    './public/css/styles/*.styl'
+    './public/assets/styles/*.styl'
   ])
     .pipe(stylusFiler)
     .pipe(stylus({
        use: nib(),
-       compress: false
+       compress: true
      }))
     .pipe(concat('style.css'))
-    .pipe(gulp.dest('./public/css'));
+    .pipe(gulp.dest('./public/assets/css'));
 });
 
 gulp.task('reload', ['css'], function () {
@@ -62,7 +62,7 @@ gulp.task('reload', ['css'], function () {
 //    livereload.changed();
     livereload.reload();
   }, 500)
-})
+});
 
 gulp.task('watch', function() {
   livereload.listen();
