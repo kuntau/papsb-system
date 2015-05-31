@@ -1,0 +1,22 @@
+/*
+ * MIXINS-----------
+ */
+
+/* material design card */
+material-shadow(depth)
+  depth -= 1
+  box-shadow: bottom-shadow(depth), top-shadow(depth)
+
+top-shadow(depth = 1)
+  offset = 1.5px 3px 10px 14px 19px
+  blur = 6px 12px 40px 56px 56px
+  color = .12 .16 .19 .25 .30
+
+  0 offset[depth] blur[depth] rgba(black, color[depth])
+
+bottom-shadow(depth = 1)
+  offset = 1.5px 3px 6px 10px 15px
+  blur = 4px 12px 12px 20px 24px
+  color = .25 .23 .23 .23 .22
+
+  0 offset[depth] blur[depth] rgba(black, color[depth])

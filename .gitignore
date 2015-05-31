@@ -1,4 +1,7 @@
+# folders
+.idea
 node_modules
 public/assets/libs
-.idea
+
+# compiled files
 public/assets/css/style.css

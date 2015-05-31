@@ -7,7 +7,7 @@
   ],
   "loadEagerly": [
     "app/**/*.js",
-    "public/js/**/*.js"
+    "public/modules/**/*.js"
   ],
   "plugins": {
     "complete_strings": {},
