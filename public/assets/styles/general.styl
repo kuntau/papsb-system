@@ -4,6 +4,7 @@
 
 */
 @require 'variables'
+@require 'mixin'
 
 body
   background rgb(254, 254, 254)
@@ -47,8 +48,9 @@ a
   margin-top 70px
   padding 50px
   //border solid 1px $silver
-  border-radius 1em
-  box-shadow $silver 0 0 3px
+  //border-radius 1em
+  //box-shadow $silver 0 0 3px
+  material-shadow(1)
   background-color $clouds
 
 .auth-info
