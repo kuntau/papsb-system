@@ -1,10 +1,9 @@
 (function () {
   'use strict';
 
-  angular.module('papsb.core', [
-    'ui.bootstrap',
+  angular.module('utils.router', [
     'ui.router',
-    'ngAnimate'
+    'papsb.core'
   ]);
 
 })();

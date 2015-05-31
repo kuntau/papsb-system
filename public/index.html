@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="/">
 
-  <title data-ng-bind="'PAPSB - ' + $state.current.title">PAPSB - Workshop Module</title>
+  <title data-ng-bind="'PAPSB INTERNAL - ' + $state.current.title">PAPSB INTERNAL PORTAL</title>
 
   <link rel="stylesheet" href="assets/libs/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/libs/font-awesome/css/font-awesome.min.css" />
@@ -22,7 +22,7 @@
 <body>
 
 <!-- it is important to remember all template's path need to be double quoted-->
-  <data-ng-include src="'views/shell.html'"></data-ng-include>
+  <data-ng-include src="'modules/core/views/shell.html'"></data-ng-include>
 
 <!-- vendors:start -->
   <script src="assets/libs/angular/angular.js"></script>
@@ -35,15 +35,15 @@
 <!-- vendors:end -->
 
 <!-- bootstrap:start-->
-  <script src="modules/core/core.js"></script>
+  <script src="modules/app.module.js"></script>
   <script src="modules/app.route.js"></script>
 <!-- bootstrap:end-->
 
 <!-- modules:start-->
   <script src="modules/core/core.module.js"></script>
   <script src="modules/core/core.js"></script>
-  <script src="modules/utils/router/router.module.js"></script>
-  <script src="modules/utils/router/router.js"></script>
+  <!--<script src="modules/utils/router/router.module.js"></script>-->
+  <!--<script src="modules/utils/router/router.js"></script>-->
 <!-- modules:end-->
 
 <!-- dev:start -->

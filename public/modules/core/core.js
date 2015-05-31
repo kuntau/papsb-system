@@ -3,12 +3,7 @@
 
 // create the module and name it papsb
 angular
-  .module('papsb.core', [
-          'ui.bootstrap',
-          'ui.router',
-          'ngAnimate',
-          'toastr'
-          ])
+  .module('papsb.core')
   .controller('ShellCtrl', ShellCtrl)
   .controller('WorkshopCtrl', WorkshopCtrl)
   .controller('AboutCtrl', AboutCtrl)
@@ -17,8 +12,8 @@ angular
   .factory('Auth', Auth)
   .factory('UI', UI);
 
-ShellCtrl.$inject = ['$scope', '$state','UI', 'Auth'];
-function ShellCtrl($scope, $state, UI, Auth) {
+ShellCtrl.$inject = ['$scope', 'UI', 'Auth'];
+function ShellCtrl($scope, UI, Auth) {
   console.log("From: ShellCtrl");
   var shell            = this;
   // core variable

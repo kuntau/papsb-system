@@ -5,18 +5,18 @@
 
 // manage all routes in one file
 angular.module('papsb')
-  .run(['$rootScope', '$state', '$stateParams', 'toastr', 'toastrConfig', 'UI', papsbInit])
+  .run(['$rootScope', '$state', '$stateParams', 'UI', papsbInit])
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', papsbRoute]);
 
-function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig, UI) {
+function papsbInit ($rootScope, $state, $stateParams, UI) {
   $rootScope.$state = $state;
   $rootScope.$stateParams = $stateParams;
-  angular.extend(toastrConfig, {
-    positionClass        : 'toast-bottom-right',
-    tapToDismiss         : true,
-    newestOnTop          : false,
-    preventOpenDuplicates: true
-  });
+  //angular.extend(toastrConfig, {
+  //  positionClass        : 'toast-bottom-right',
+  //  tapToDismiss         : true,
+  //  newestOnTop          : false,
+  //  preventOpenDuplicates: true
+  //});
   // monitor `state change`
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
     if (toState.redirectTo) {
@@ -31,7 +31,7 @@ function papsbInit ($rootScope, $state, $stateParams, toastr, toastrConfig, UI) 
 }
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
-  $locationProvider.html5Mode(true).hashPrefix('!');
+  //$locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider
     .otherwise('/login'); // for any unmatched url, redirect here
 
@@ -39,7 +39,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
     // route for the workshop page
     .state('workshop', {
       url         : '/workshop',
-      templateUrl : 'workshop/views/workshop.html',
+      templateUrl : 'modules/workshop/views/workshop.html',
       title       : 'Workshop Dashboard',
       controller  : 'WorkshopCtrl as vm',
       redirectTo  : 'workshop.overview'
@@ -47,15 +47,15 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     .state('workshop.overview', {
       url         : '/overview',
-      templateUrl : 'workshop/views/workshop.overview.html',
-      title       : 'Overview',
+      templateUrl : 'modules/workshop/views/workshop.overview.html',
+      title       : 'Overview'
     })
 
     .state('workshop.message1', {
       url         : '/:page',
-      templateUrl : 'workshop/views/workshop.message1.html',
+      templateUrl : 'modules/workshop/views/workshop.message1.html',
       title       : 'Message 1',
-      controller  : function ($scope, $stateParams, toastr, getTitle) {
+      controller  : function ($scope, $stateParams, getTitle) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
         $scope.title = getTitle.title;
         $scope.page = $stateParams.page;
@@ -80,23 +80,23 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     .state('workshop.message2', {
       url         : '/aum/message2',
-      templateUrl : 'workshop/views/workshop.message2.html',
+      templateUrl : 'modules/workshop/views/workshop.message2.html',
       title       : 'Message 2',
-      controller  : function ($scope, toastr) {
+      controller  : function ($scope) {
         $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
       }
     })
 
     .state('about', {
       url         : '/about',
-      templateUrl : 'core/views/about.html',
+      templateUrl : 'modules/core/views/about.html',
       controller  : 'AboutCtrl as vm',
       title       : 'About Us'
     })
 
     .state('contact', {
       url         : '/contact',
-      templateUrl : 'core/views/contact.html',
+      templateUrl : 'modules/core/views/contact.html',
       controller  : 'ContactCtrl as vm',
       title       : 'Contact Us',
       resolve     : {
@@ -110,7 +110,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     .state('login', {
       url         : '/login',
-      templateUrl : 'core/views/login.html',
+      templateUrl : 'modules/core/views/login.html',
       title       : 'Login'
       //controller  : 'AuthCtrl as vm'
     });

@@ -3,7 +3,7 @@
 
   angular.module('papsb.core', [
     'ui.bootstrap',
-    'ui.router',
+    'toastr',
     'ngAnimate'
   ]);
 
