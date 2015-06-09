@@ -14,19 +14,17 @@ module.exports = function(app, passport) {
 
   // api -------------
 
-  app.get('/api/auth', isLoggedIn, function (req, res) {
-      res.send('authenticated');
-    }
-  );
+  app.get('/api/auth', isLoggedIn, function(req, res) {
+    res.send('authenticated');
+  });
 
-  app.post('/api/auth', passport.authenticate('login'), function (req, res) {
-      if (req.user) {
-        res.json(req.user)
-      } else res.status(403).send({ error: 'Login error'})
-    }
-  );
+  app.post('/api/auth', passport.authenticate('login'), function(req, res) {
+    if (req.user) {
+      res.json(req.user)
+    } else res.status(403).send({ error: 'Login error'})
+  });
 
-  app.delete('/api/auth', function (req, res) {
+  app.delete('/api/auth', function(req, res) {
     if (req.user) {
       req.logOut();
       res.send('Logged out')

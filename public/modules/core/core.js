@@ -14,7 +14,7 @@ angular
 
 ShellCtrl.$inject = ['$scope', 'UI', 'Auth'];
 function ShellCtrl($scope, UI, Auth) {
-  console.log("From: ShellCtrl");
+  console.log('From: ShellCtrl');
   var shell            = this;
   // core variable
   shell.sidebarStatus  = UI.getSidebarStatus;
@@ -25,6 +25,7 @@ function ShellCtrl($scope, UI, Auth) {
   shell.reload         = reload;
   shell.ui             = {state: UI.getCurrentState, sidebar: UI.getSidebarStatus};
   shell.user           = {};
+
   // temp variable
   shell.loginForm      = { username: 'kuntau', password: 'kunkun' };
   shell.message        = 'Everyone come and see how good id look';
