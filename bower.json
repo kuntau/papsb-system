@@ -23,7 +23,8 @@
     "bootstrap": "^3.x",
     "font-awesome": "^4.x",
     "angular-toastr": "^1.x",
-    "spin.js": "^2.x"
+    "spin.js": "^2.x",
+    "angular-chart.js": "~0.7.2"
   },
   "devDependencies": {
     "Faker": "^2.x",
