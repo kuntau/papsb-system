@@ -14,17 +14,16 @@ gulp.task('default', function () {
 
 gulp.task('dev', ['css'], function() {
   var watcher = gulp.watch([
-        'public/js/**',
-        'public/css/**',
-        'public/views/**',
+        'public/modules/**',
+        'public/assets/styles/**',
+        // 'public/views#<{(|*',
         'public/index.html',
-        '!public/css/style.css'
         ], ['reload']);
 
   nodemon({ script: 'server.js',
             ext: 'js',
             env: { 'NODE_ENV': 'development' },
-            ignore: ['.git/**','.idea/**','./public/**']
+            ignore: ['.git/**','.idea/**','./public/assets/css/*']
           });
 
   livereload({ start: true });
@@ -34,7 +33,7 @@ gulp.task('dev', ['css'], function() {
 });
 
 gulp.task('js', function () {
-  var source = ['./public/js/**.js'];
+  var source = ['./public/modules/**.js'];
 
   return gulp
     .src(source)
@@ -43,15 +42,15 @@ gulp.task('js', function () {
 });
 
 gulp.task('css', function () {
-  var stylusFiler = filter('**/*.styl');
+  // var stylusFiler = filter('*.styl');
 
   return gulp.src([
     './public/assets/styles/*.styl'
   ])
-    .pipe(stylusFiler)
+    // .pipe(stylusFiler)
     .pipe(stylus({
        use: nib(),
-       compress: true
+       compress: false
      }))
     .pipe(concat('style.css'))
     .pipe(gulp.dest('./public/assets/css'));

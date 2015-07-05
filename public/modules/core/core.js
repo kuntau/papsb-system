@@ -4,6 +4,7 @@
 // create the module and name it papsb
 angular
   .module('papsb.core')
+  // .run(['toastrConfig', coreConfig])
   .controller('ShellCtrl', ShellCtrl)
   .controller('WorkshopCtrl', WorkshopCtrl)
   .controller('AboutCtrl', AboutCtrl)
@@ -11,6 +12,12 @@ angular
   .directive('bsHolder', bsHolder)
   .factory('Auth', Auth)
   .factory('UI', UI);
+
+function coreConfig(toastrConfig) {
+  angular.extend(toastrConfig, {
+    closeButton: true
+  })
+};
 
 ShellCtrl.$inject = ['$scope', 'UI', 'Auth'];
 function ShellCtrl($scope, UI, Auth) {
@@ -163,8 +170,15 @@ function Auth($q, $http) {
   }
 }
 
-UI.$inject = ['$state', 'toastr'];
-function UI($state, toastr) {
+UI.$inject = ['$state', 'toastr', 'toastrConfig'];
+function UI($state, toastr, toastrConfig) {
+  // angular.extend(toastrConfig, {
+  //  positionClass        : 'toast-bottom-right',
+  //  tapToDismiss         : true,
+  //  newestOnTop          : false,
+  //  preventOpenDuplicates: true
+  // });
+
   var sidebarStatus = false;
   var workshopStatus = false;
   var currentState;

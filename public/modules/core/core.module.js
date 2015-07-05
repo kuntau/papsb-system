@@ -4,6 +4,7 @@
   angular.module('papsb.core', [
     'ui.bootstrap',
     'toastr',
+    // 'toastrConfig',
     'ngAnimate'
   ]);
 
