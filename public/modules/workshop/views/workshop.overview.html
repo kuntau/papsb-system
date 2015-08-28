@@ -12,15 +12,11 @@
     <h4>Label</h4>
     <span class="text-muted">Something else</span>
   </div>
-  <div class="col-xs-6 col-sm-3 placeholder">
-    <img data-src="holder.js/200x200?random=yes" class="img-responsive" alt="Generic placeholder thumbnail">
-    <h4>Label</h4>
-    <span class="text-muted">Something else</span>
-  </div>
-  <div class="col-xs-6 col-sm-3 placeholder">
-    <img data-src="holder.js/200x200?random=yes" class="img-responsive" alt="Generic placeholder thumbnail">
-    <h4>Label</h4>
-    <span class="text-muted">Something else</span>
+  <div class="col-xs-12 col-sm-6 placeholder">
+    <canvas id="line" class="chart chart-line" data="vm.data"
+      labels="vm.label" legend="true" series="vm.series"
+      click="vm.onClick">
+    </canvas>
   </div>
 </div>
 

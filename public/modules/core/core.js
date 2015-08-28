@@ -80,9 +80,19 @@ function ShellCtrl($scope, UI, Auth) {
 }
 
 
-WorkshopCtrl.$inject = ['UI'];
-function WorkshopCtrl(UI) {
+WorkshopCtrl.$inject = ['$scope','UI'];
+function WorkshopCtrl($scope, UI) {
   var vm = this;
+
+  vm.label = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
+  vm.series = [ 'Series A', 'Series B' ];
+  vm.data = [
+    [65, 59, 80, 81, 56, 55, 40],
+    [28, 48, 40, 19, 86, 27, 90]
+  ];
+  vm.onClick = function (points, event) {
+    console.log(points, event)
+  }
 }
 
 function AboutCtrl() {
@@ -93,6 +103,10 @@ function AboutCtrl() {
 function ContactCtrl() {
   var vm = this;
   vm.message = 'You now can contact us!!';
+}
+
+function ChartCtrl() {
+  var vm = this;
 }
 
 function bsHolder() {
