@@ -1,21 +1,22 @@
 
-<h1 class="page-header">Dashboard</h1>
+<h1 class="page-header">Ringkasan Operasi</h1>
 
-<div class="row placeholders">
-  <div class="col-xs-6 col-sm-3 placeholder">
-    <img data-src="holder.js/200x200?random=yes" class="img-responsive" alt="Generic placeholder thumbnail" bs-holder>
-    <h4>Label</h4>
-    <span class="text-muted">Something else</span>
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <h4 class="sub-header">Kehadiran Hari Ini</h4>
+    <canvas id="doughnut" class="chart chart-doughnut" data="vm.doug.data" labels="vm.doug.labels"
+      legend="true"></canvas>
   </div>
-  <div class="col-xs-6 col-sm-3 placeholder">
-    <img data-src="holder.js/200x200?random=yes" class="img-responsive" alt="Generic placeholder thumbnail">
-    <h4>Label</h4>
-    <span class="text-muted">Something else</span>
-  </div>
-  <div class="col-xs-12 col-sm-6 placeholder">
-    <canvas id="line" class="chart chart-line" data="vm.data"
-      labels="vm.label" legend="true" series="vm.series"
-      click="vm.onClick">
+  <!-- <div class="col&#45;xs&#45;6 col&#45;sm&#45;3 placeholder"> -->
+  <!--   <img data&#45;src="holder.js/200x200?random=yes" class="img&#45;responsive" alt="Generic placeholder thumbnail"> -->
+  <!--   <h4>Label</h4> -->
+  <!--   <span class="text&#45;muted">Something else</span> -->
+  <!-- </div> -->
+  <div class="col-xs-12 col-sm-6">
+    <h4 class="sub-header">Sejarah Kehadiran Seminggu</h4>
+    <canvas id="line" class="chart chart-line" data="vm.line.data"
+      labels="vm.line.labels" legend="true" series="vm.line.series"
+      click="vm.line.onClick">
     </canvas>
   </div>
 </div>
