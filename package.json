@@ -27,7 +27,7 @@
   "devDependencies": {
     "gulp": "^3.x",
     "gulp-concat": "^2.x",
-    "gulp-filter": "^2.x",
+    "gulp-filter": "^3.x",
     "gulp-livereload": "^3.x",
     "gulp-ng-annotate": "^1.x",
     "gulp-nodemon": "^2.x",
