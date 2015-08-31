@@ -1,5 +1,7 @@
 // routes.js
 
+var faker = require('faker');
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     console.log('routes.js --> user is authenticated');
@@ -31,10 +33,17 @@ module.exports = function(app, passport) {
     } else res.status(400).json({ error: 'You\'re not logged in' })
   });
 
+  // faker
+  app.get('/api/user', function (req, res) {
+    res.json( faker.helpers.userCard() )
+  })
+
+  // sessions --
   app.get('/login', function(req, res) {
     res.sendFile('./public/index.html', { root: __dirname + '/..' });
   });
 
+  // catch all --
   app.get('*', isLoggedIn, function(req, res) {
     res.sendFile('./public/index.html', { root: __dirname + '/..' });
   });
