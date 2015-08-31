@@ -25,19 +25,15 @@
   color $sidebarhovercolor
 
 .sidebar-wrapper
-  display none
+  // display none
 
 @media(min-width:768px)
   .sidebar-wrapper
     position fixed
     display block
     padding 20px
-    top 71px
-    bottom 0
-    left 0
+    height 100vh
     z-index 1000
-    overflow-x hidden
-    overflow-y auto
     background $sidebarbgcolor
     border-right 1px solid #eee
     //-webkit-transition all 0.5s ease
