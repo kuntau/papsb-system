@@ -69,16 +69,16 @@
 .animate-moveToRight.ng-enter, .animate-moveToRight.ng-leave.ng-enter-active { opacity:1; }
 
 .animate-moveFromRight.ng-enter, .animate-moveFromRight.ng-leave {
-  -webkit-animation: moveFromRight .6s ease both;
-  animation: moveFromRight .6s ease both;
+  -webkit-animation: moveFromRight .25s ease both;
+  animation: moveFromRight .25s ease both;
   position: absolute;
 }
 .animate-moveFromRight.ng-enter, .animate-moveFromRight.ng-leave.ng-leave-active { opacity:0; }
 .animate-moveFromRight.ng-enter, .animate-moveFromRight.ng-leave.ng-enter-active { opacity:1; }
 
 .animate-moveFromTop.ng-enter, .animate-moveFromTop.ng-leave {
-  -webkit-animation: moveFromTop .6s ease both;
-  animation: moveFromTop .6s ease both;
+  -webkit-animation: moveFromTop .25s ease both;
+  animation: moveFromTop .25s ease both;
 }
 .animate-moveFromTop.ng-enter, .animate-moveFromTop.ng-leave.ng-leave-active { opacity:0; }
 .animate-moveFromTop.ng-enter, .animate-moveFromTop.ng-leave.ng-enter-active { opacity:1; }
