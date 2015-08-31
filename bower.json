@@ -27,7 +27,7 @@
     "spin.js": "^2.x"
   },
   "devDependencies": {
-    "Faker": "^2.x",
+    "Faker": "^3.x",
     "holderjs": "^2.x"
   }
 }
