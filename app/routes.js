@@ -1,4 +1,5 @@
 // routes.js
+'use strict';
 
 var faker = require('faker');
 
@@ -38,8 +39,9 @@ module.exports = function(app, passport) {
     res.json( faker.helpers.userCard() )
   });
   app.get('/api/users', function (req, res) {
-    var users = [];
-    for (var i = 0; i < 20; i++) {
+    var users = [],
+        limit = 200;
+    for (var i = 0; i < limit; i++) {
       users.push(faker.helpers.userCard());
     }
     res.json(users)

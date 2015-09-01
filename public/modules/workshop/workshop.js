@@ -5,9 +5,11 @@
     .module('papsb.workshop')
     .controller('WorkshopCtrl', Workshop);
 
-  // Workshop.$inject = [ '$scope' ];
-  function Workshop($scope) {
+  Workshop.$inject = [ '$scope', 'dataservice' ];
+  function Workshop($scope, dataservice) {
     var vm = this;
+
+    getUsers();
 
     /* line chart */
     vm.line = {
@@ -27,6 +29,15 @@
       labels: [ 'Hadir', 'Tak Hadir (T)', 'Tak Hadir (D)', 'MC', 'Cuti' ],
       data: [ 25, 5, 2, 2, 1 ]
     };
-  }
+
+    /* faker */
+    function getUsers() {
+      return dataservice.getUsers()
+        .then(function(data) {
+          vm.users = data;
+          return vm.users;
+        });
+    }
+  } //WorkshopCtrl
 
 })();

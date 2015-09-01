@@ -245,7 +245,7 @@ function dataservice($http) {
   function getUsers() {
     return $http.get('/api/users')
       .then(getUsersComplete)
-      .catch(getUsersError);
+      .catch(getUsersFailed);
 
       function getUsersComplete(res) {
         return res.data;
