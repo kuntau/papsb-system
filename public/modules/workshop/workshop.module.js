@@ -3,7 +3,7 @@
 
   angular.module('papsb.workshop', [
     'papsb.core',
-    'papsb.ui',
+    // 'papsb.ui',
 
     'chart.js'
   ]);

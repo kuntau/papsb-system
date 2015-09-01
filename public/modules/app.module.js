@@ -1,8 +1,10 @@
   angular.module('papsb',[
     'papsb.core',
-    'ui.router'
+    'ui.router',
+
     //'utils.logger',
     //'utils.router'
-    //'papsb.workshop',
+
+    'papsb.workshop'
     //'papsb.spektra'
   ]);

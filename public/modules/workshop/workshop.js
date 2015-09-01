@@ -3,9 +3,9 @@
 
   angular
     .module('papsb.workshop')
-    .controller('Workshop', Workshop);
+    .controller('WorkshopCtrl', Workshop);
 
-  Workshop.$inject = [ '$scope' ];
+  // Workshop.$inject = [ '$scope' ];
   function Workshop($scope) {
     var vm = this;
 
@@ -28,6 +28,5 @@
       data: [ 25, 5, 2, 2, 1 ]
     };
   }
-
 
 })();
