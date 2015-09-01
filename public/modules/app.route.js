@@ -41,7 +41,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       url         : '/workshop',
       templateUrl : 'modules/workshop/views/workshop.html',
       title       : 'Workshop Dashboard',
-      controller  : 'WorkshopCtrl as vm',
+      controller  : 'Workshop as vm',
       redirectTo  : 'workshop.overview'
     })
 

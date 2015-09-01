@@ -36,7 +36,14 @@ module.exports = function(app, passport) {
   // faker
   app.get('/api/user', function (req, res) {
     res.json( faker.helpers.userCard() )
-  })
+  });
+  app.get('/api/users', function (req, res) {
+    var users = [];
+    for (var i = 0; i < 20; i++) {
+      users.push(faker.helpers.userCard());
+    }
+    res.json(users)
+  });
 
   // sessions --
   app.get('/login', function(req, res) {

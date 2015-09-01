@@ -1,6 +1,11 @@
 (function () {
   'use strict';
 
-  angular.module('papsb.workshop', ['papsb.ui']);
+  angular.module('papsb.workshop', [
+    'papsb.core',
+    'papsb.ui',
+
+    'chart.js'
+  ]);
 
 })();
