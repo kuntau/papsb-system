@@ -40,7 +40,7 @@ module.exports = function(app, passport) {
   });
   app.get('/api/users', function (req, res) {
     var users = [],
-        limit = 200;
+        limit = 20;
     for (var i = 0; i < limit; i++) {
       users.push(faker.helpers.userCard());
     }

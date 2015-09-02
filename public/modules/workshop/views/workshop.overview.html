@@ -1,18 +1,28 @@
 
-<h1 class="page-header">Ringkasan Operasi</h1>
+<h1 class="page-header">Workshop Overview</h1>
 
 <div class="row">
   <div class="col-xs-12 col-sm-6">
-    <h4 class="sub-header">Kehadiran Hari Ini</h4>
-    <canvas id="doughnut" class="chart chart-doughnut" data="vm.doug.data" labels="vm.doug.labels"
-      legend="true"></canvas>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Repair Type <span class="badge" ng-click="vm.random()">random</span></h3>
+      </div>
+      <div class="panel-body">
+        <canvas id="doughnut" class="chart chart-doughnut" data="vm.doug.data" labels="vm.doug.labels"
+          legend="true"></canvas>
+      </div>
+    </div>
   </div>
   <div class="col-xs-12 col-sm-6">
-    <h4 class="sub-header">Sejarah Kehadiran Seminggu</h4>
-    <canvas id="line" class="chart chart-line" data="vm.line.data"
-      labels="vm.line.labels" legend="true" series="vm.line.series"
-      click="vm.line.onClick">
-    </canvas>
+    <div class="panel panel-default">
+      <div class="panel-heading">Weekly Workshop Load</div>
+      <div class="panel-body">
+        <canvas id="line" class="chart chart-line" data="vm.line.data"
+          labels="vm.line.labels" legend="true" series="vm.line.series"
+          click="vm.line.onClick">
+        </canvas>
+      </div>
+    </div>
   </div>
 </div>
 
