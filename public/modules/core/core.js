@@ -13,15 +13,15 @@ angular
   .factory('UI', UI)
   .factory('dataservice', dataservice);
 
-function coreConfig(toastrConfig) {
-  angular.extend(toastrConfig, {
-    closeButton: true
-  })
-}
+// function coreConfig(toastrConfig) {
+//   angular.extend(toastrConfig, {
+//     closeButton: true
+//   })
+// }
 
 ShellCtrl.$inject = ['$scope', 'UI', 'Auth'];
 function ShellCtrl($scope, UI, Auth) {
-  console.log('From: ShellCtrl');
+  // console.log('From: ShellCtrl');
   var shell            = this;
   // core variable
   shell.sidebarStatus  = UI.getSidebarStatus;
@@ -32,6 +32,7 @@ function ShellCtrl($scope, UI, Auth) {
   shell.reload         = reload;
   shell.ui             = {state: UI.getCurrentState, sidebar: UI.getSidebarStatus};
   shell.user           = {};
+  shell.loading        = true;
 
   // temp variable
   shell.loginForm      = { username: 'kuntau', password: 'kunkun' };
@@ -167,17 +168,17 @@ function Auth($q, $http) {
 
 UI.$inject = ['$state', 'toastr', 'toastrConfig'];
 function UI($state, toastr, toastrConfig) {
-  // angular.extend(toastrConfig, {
-  //  positionClass        : 'toast-bottom-right',
-  //  tapToDismiss         : true,
-  //  newestOnTop          : false,
-  //  preventOpenDuplicates: true
-  // });
+  angular.extend(toastrConfig, {
+   positionClass        : 'toast-bottom-right',
+   tapToDismiss         : true,
+   newestOnTop          : false
+   // preventOpenDuplicates: true
+  });
 
   var sidebarStatus = false;
   var workshopStatus = false;
   var currentState;
-  console.log("From: UI");
+  // console.log("From: UI");
 
   return {
     getSidebarStatus : getSidebarStatus,

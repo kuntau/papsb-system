@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<h2 class="sub-header">Section title</h2>
+<h2 class="sub-header">Customer List</h2>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -32,7 +32,7 @@
       <tr ng-repeat="user in vm.users">
         <td>{{ 'S00' + ($index + 1) }}</td>
         <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
+        <td>{{ user.email | lowercase }}</td>
         <td>{{ user.phone }}</td>
         <td>{{ user.address.city }}</td>
       </tr>
