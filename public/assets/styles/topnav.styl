@@ -8,17 +8,23 @@
   -webkit-box-shadow 0 1px 1px rgba(0,0,0,.1)
   box-shadow 0 1px 1px rgba(0,0,0,.1)
   background $topnavbgcolor
-  height 70px
+  height 70px !important
   margin-bottom 0
 
-.navbar-header button
-  margin-top 18px
-  margin-bottom 18px
+.navbar-header
+  float left
+  button
+    margin-top 18px
+    margin-bottom 18px
+
+.navbar-nav,
+.navbar-nav > li
+  float left
+  margin 0
 
 .navbar-nav > li > a,
 .navbar-brand
   font-size 14px
-  height 70px
   line-height 70px
   text-transform uppercase
   padding 0 20px
@@ -37,6 +43,9 @@
   background $topnavbghovercolor
   cursor pointer
 
+.navbar-default .navbar-nav li.active a:focus
+  background $topnavbghovercolor
+
 .navbar-default .navbar-nav a
   color $topnavcolor
   background-color $topnavbgcolor
@@ -46,6 +55,7 @@
 
 .navbar-default .nav.navbar-nav.navbar-right
   margin-right 0
+  float right !important
 
 .navbar-nav a .fa
   margin-right 5px
@@ -53,3 +63,29 @@
 .navbar-fixed-top
   border 0
 
+// user info
+.navbar-nav
+  .img-circle
+    border 2px solid $topnavbghovercolor
+  .user-info
+    overflow hidden
+    text-overflow ellipsis
+    display inline-block
+    white-space nowrap
+    line-height 20px
+    margin-top 15px
+    max-width 100px
+    vertical-align top
+  .user-info small
+    display block
+
+// non collapse menu fix
+.navbar-right .dropdown-menu
+  right 0 !important
+  left auto !important
+  position absolute !important
+  float left !important
+  margin 2px 0 0 !important
+  background-color #fff !important
+  border 1px solid rgba(0,0,0,.15) !important
+  box-shadow 0 6px 12px rgba(0,0,0,.175) !important

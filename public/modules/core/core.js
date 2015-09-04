@@ -4,7 +4,6 @@
 // create the module and name it papsb
 angular
   .module('papsb.core')
-  // .run(['toastrConfig', coreConfig])
   .controller('ShellCtrl', ShellCtrl)
   .controller('AboutCtrl', AboutCtrl)
   .controller('ContactCtrl', ContactCtrl)
@@ -12,12 +11,6 @@ angular
   .factory('Auth', Auth)
   .factory('UI', UI)
   .factory('dataservice', dataservice);
-
-// function coreConfig(toastrConfig) {
-//   angular.extend(toastrConfig, {
-//     closeButton: true
-//   })
-// }
 
 ShellCtrl.$inject = ['$scope', 'UI', 'Auth'];
 function ShellCtrl($scope, UI, Auth) {
@@ -129,6 +122,7 @@ function Auth($q, $http) {
         .success(function (data) {
           user = data;
           user.authenticated = true;
+          user.avatar = faker.image.avatar();
           put(user);
           resolve(data);
         })
