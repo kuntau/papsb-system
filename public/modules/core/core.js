@@ -129,6 +129,7 @@ function Auth($q, $http) {
         .success(function (data) {
           user = data;
           user.authenticated = true;
+          user.avatar = faker.image.avatar();
           put(user);
           resolve(data);
         })

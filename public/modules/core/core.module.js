@@ -5,7 +5,7 @@
     'ui.bootstrap',
     'toastr',
     'chart.js',
-    // 'toastrConfig',
+    'Faker'
     'ngAnimate'
   ]);
 
