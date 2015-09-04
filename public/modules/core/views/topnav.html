@@ -11,41 +11,34 @@
     </a>
     </div>
 
-    <!-- <div class="collapse navbar&#45;collapse" id="topnav"> -->
-      <ul class="nav navbar-nav hidden-xs">
-        <li ui-sref-active="active"><a ui-sref="operation"><i class="fa fa-bus"></i>OPERATION</a></li>
-        <li ui-sref-active="active"><a ui-sref="workshop"><i class="fa fa-wrench"></i>WORKSHOP</a></li>
-        <li ui-sref-active="active"><a ui-sref="about"><i class="fa fa-info"></i>ABOUT</a></li>
-        <li ui-sref-active="active"><a ui-sref="contact"><i class="fa fa-comment"></i>CONTACT</a></li>
-      </ul>
-      <ul class="nav navbar-nav visible-xs-inline">
-        <li ui-sref-active="active"><a ui-sref="operation"><i class="fa fa-bus fa-lg"></i></a></li>
-        <li ui-sref-active="active"><a ui-sref="workshop"><i class="fa fa-wrench fa-lg"></i></a></li>
-        <li ui-sref-active="active"><a ui-sref="about"><i class="fa fa-info fa-lg"></i></a></li>
-        <li ui-sref-active="active"><a ui-sref="contact"><i class="fa fa-comment fa-lg"></i></a></li>
-      </ul>
-      <!-- <ul class="nav navbar&#45;nav navbar&#45;right hidden&#45;xs"> -->
-        <!-- <li ng&#45;if="shell.ui.state().split('.')[0] == 'workshop'"><a ng&#45;click="shell.sidebarToggle()"><i class="fa fa&#45;adn"></i>w -->
-        <!--   <span class="badge badge&#45;warning">{{shell.sidebarStatus() ? 'ON' : 'OFF'}}</span></a></li> -->
-      <!--   <li ng&#45;if="shell.user.authenticated == false &#38;&#38; shell.ui.state() != 'login'"><a ui&#45;sref="login" ><i class="fa fa&#45;sign&#45;in"></i> Login</a></li> -->
-      <!--   <li ng&#45;if="shell.user.authenticated == true"><a ng&#45;click="shell.logout()" ><i class="fa fa&#45;sign&#45;out"></i> {{ shell.user.username }}</a></li> -->
-      <!-- </ul> -->
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-if="shell.user.authenticated == false && shell.ui.state() != 'login'"><a ui-sref="login" ><i class="fa fa-sign-in fa-lg"></i> Login</a></li>
-        <li ng-if="shell.user.authenticated == true">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img class="img-circle" ng-src="{{ shell.user.avatar }}" width="40px" />
-            <span class="user-info hidden-xs">
-              <small>Welcome,</small>{{ shell.user.username }}
-            </span>
-            <i class="fa fa-caret-down"></i></a>
-          <ul class="dropdown-menu">
-            <li><a href="#"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
-            <li class="divider"></li>
-            <li><a href="#"><i class="fa fa-sign-out fa-lg"></i> {{ shell.user.username }}</a></li>
-          </ul>
-        </li>
-      </ul>
-    <!-- </div><!&#45;&#45; collapse &#45;&#45;> -->
+    <ul class="nav navbar-nav hidden-xs">
+      <li ui-sref-active="active"><a ui-sref="operation"><i class="fa fa-bus"></i>OPERATION</a></li>
+      <li ui-sref-active="active"><a ui-sref="workshop"><i class="fa fa-wrench"></i>WORKSHOP</a></li>
+      <li ui-sref-active="active"><a ui-sref="about"><i class="fa fa-info"></i>ABOUT</a></li>
+      <li ui-sref-active="active"><a ui-sref="contact"><i class="fa fa-comment"></i>CONTACT</a></li>
+    </ul>
+    <ul class="nav navbar-nav visible-xs-inline">
+      <li ui-sref-active="active"><a ui-sref="operation"><i class="fa fa-bus fa-lg"></i></a></li>
+      <li ui-sref-active="active"><a ui-sref="workshop"><i class="fa fa-wrench fa-lg"></i></a></li>
+      <li ui-sref-active="active"><a ui-sref="about"><i class="fa fa-info fa-lg"></i></a></li>
+      <li ui-sref-active="active"><a ui-sref="contact"><i class="fa fa-comment fa-lg"></i></a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li ng-if="shell.user.authenticated == false && shell.ui.state() != 'login'"><a ui-sref="login" ><i class="fa fa-sign-in fa-lg"></i> Login</a></li>
+      <li ng-if="shell.user.authenticated == true" class="dropdown">
+        <a id="drop-auth" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true">
+          <img class="img-circle" ng-src="{{ shell.user.avatar }}" width="40px" />
+          <span class="user-info hidden-xs">
+            <small>Welcome,</small>{{ shell.user.username }}
+          </span>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+          <li class="divider"></li>
+          <li><a ng-click="shell.logout()"><i class="fa fa-sign-out fa-lg"></i> {{ shell.user.username }}</a></li>
+        </ul>
+      </li>
+    </ul>
   </div><!-- container-fluid -->
 </nav>
