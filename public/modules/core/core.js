@@ -122,7 +122,8 @@ function Auth($q, $http) {
         .success(function (data) {
           user = data;
           user.authenticated = true;
-          user.avatar = faker.image.avatar();
+          // user.avatar = faker.image.avatar();
+          user.avatar = '../../assets/img/avatar.jpg';
           put(user);
           resolve(data);
         })

@@ -4,10 +4,10 @@
   angular.module('papsb.core', [
     'ui.bootstrap',
     'toastr',
-    'chart.js'
+    'chart.js',
     // toastrConfig,
     // 'Faker'
-    // 'ngAnimate'
+    'ngAnimate'
   ]);
 
 })();
