@@ -30,13 +30,14 @@
           <img class="img-circle" ng-src="{{ shell.user.avatar }}" width="40px" />
           <span class="user-info hidden-xs">
             <small>Welcome,</small>{{ shell.user.username }}
-          </span>
-          <span class="caret"></span>
+          </span>&nbsp;
+          <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu">
           <li><a href="#"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+          <li><a href="#"><i class="fa fa-lock fa-lg"></i> Show Notification & Configuration</a></li>
           <li class="divider"></li>
-          <li><a ng-click="shell.logout()"><i class="fa fa-sign-out fa-lg"></i> {{ shell.user.username }}</a></li>
+          <li><a ng-click="shell.logout()"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
         </ul>
       </li>
     </ul>

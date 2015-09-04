@@ -80,12 +80,15 @@
     display block
 
 // non collapse menu fix
-.navbar-right .dropdown-menu
-  right 0 !important
-  left auto !important
-  position absolute !important
-  float left !important
-  margin 2px 0 0 !important
-  background-color #fff !important
-  border 1px solid rgba(0,0,0,.15) !important
-  box-shadow 0 6px 12px rgba(0,0,0,.175) !important
+@media (max-width: 767px)
+  .navbar-nav > li > a
+    padding 0 10px
+  .navbar-right .dropdown-menu
+    right 0 !important
+    left auto !important
+    position absolute !important
+    float left !important
+    margin 2px 0 0 !important
+    background-color #fff !important
+    border 1px solid rgba(0,0,0,.15) !important
+    box-shadow 0 6px 12px rgba(0,0,0,.175) !important
