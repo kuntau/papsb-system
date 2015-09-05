@@ -50,7 +50,7 @@ gulp.task('css', function () {
     // .pipe(stylusFiler)
     .pipe(stylus({
        use: nib(),
-       compress: false
+       compress: true
      }))
     .pipe(concat('style.css'))
     .pipe(gulp.dest('./public/assets/css'));
