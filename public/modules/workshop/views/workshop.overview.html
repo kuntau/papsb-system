@@ -5,9 +5,11 @@
   <div class="col-xs-12 col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Repair Type <span class="btn btn-xs btn-default" ng-click="vm.random()">random</span></h3>
+        <h3 class="panel-title">Repair Type
+          <a href="#" class="btn btn-xs btn-default pull-right" data-toggle="collapse" data-target="#doug"></a>
+          <span class="btn btn-xs btn-default" ng-click="vm.random()">random</span></h3>
       </div>
-      <div class="panel-body">
+      <div id="doug" class="panel-body collapse in">
         <canvas id="doughnut" class="chart chart-doughnut" data="vm.doug.data" labels="vm.doug.labels"
           legend="true"></canvas>
       </div>
@@ -16,16 +18,16 @@
   <div class="col-xs-12 col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Weekly Workshop Load <button class="btn btn-xs btn-info pull-right"
-            data-toggle="collapse" data-target="#chart">Hide</button></h3>
+        <h3 class="panel-title">
+          Weekly Workshop Load
+          <a href="#" class="btn btn-xs btn-default pull-right" data-toggle="collapse" data-target="#chart"></a>
+        </h3>
       </div>
-      <div class="collapse in" id="chart">
-        <div class="panel-body">
-          <canvas id="line" class="chart chart-line" data="vm.line.data"
-            labels="vm.line.labels" legend="true" series="vm.line.series"
-            click="vm.line.onClick">
-          </canvas>
-        </div>
+      <div id="chart" class="panel-body collapse in">
+        <canvas id="line" class="chart chart-line" data="vm.line.data"
+          labels="vm.line.labels" legend="true" series="vm.line.series"
+          click="vm.line.onClick">
+        </canvas>
       </div>
     </div>
   </div>
