@@ -33,6 +33,8 @@ function ShellCtrl($scope, UI, Auth) {
 
   activate();
 
+  return;
+
   function activate() {
     Auth.get(); /* load previous user from localStorage */
     shell.user = Auth.getUser(); /* pupulate our local user object */
@@ -64,7 +66,7 @@ function ShellCtrl($scope, UI, Auth) {
   function logout() {
     Auth.logout().then(function (data) {
       UI.success(data);
-      shell.user = {};
+      shell.user.authenticated = false;
       UI.go('login')
     }, function (data) {
       UI.error(data.error)

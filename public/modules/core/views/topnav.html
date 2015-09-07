@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-    <a ui-sref="login" class="navbar-brand hidden-xs"><i class="fa fa-home fa-lg"></i> <span class="hidden-xs">papsb internal</span>
+    <a ui-sref="login" class="navbar-brand hidden-xs"><i class="fa fa-home fa-lg"></i> <span class="hidden-xs">papsb</span>
       <span class="badge badge-info">{{ shell.user.authenticated || 'no' }}</span>
     </a>
     </div>
@@ -24,8 +24,8 @@
       <li ui-sref-active="active"><a ui-sref="contact"><i class="fa fa-comment fa-lg"></i></a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li ng-if="shell.user.authenticated == false && shell.ui.state() != 'login'"><a ui-sref="login" ><i class="fa fa-sign-in fa-lg"></i> Login</a></li>
-      <li ng-if="shell.user.authenticated == true" class="dropdown">
+      <li ng-if="shell.user.authenticated === false && shell.ui.state() != 'login'"><a ui-sref="login" ><i class="fa fa-sign-in fa-lg"></i> Login</a></li>
+      <li ng-if="shell.user.authenticated === true" class="dropdown">
         <a id="drop-auth" href="#" class="dropdown-toggle" data-toggle="dropdown">
           <img class="img-circle" ng-src="{{ shell.user.avatar }}" style="max-width: 40px" />
           <span class="user-info hidden-xs">
