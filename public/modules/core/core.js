@@ -12,15 +12,16 @@ angular
   .factory('UI', UI)
   .factory('dataservice', dataservice);
 
-ShellCtrl.$inject = ['$scope', 'UI', 'Auth'];
+ShellCtrl.$inject = [ '$scope', 'UI', 'Auth' ];
 function ShellCtrl($scope, UI, Auth) {
-  // console.log('From: ShellCtrl');
   var shell            = this;
+
   // core variable
   shell.sidebarStatus  = UI.getSidebarStatus;
   shell.workshopStatus = UI.getWorkshopStatus;
   shell.isLogged       = isLogged;
   shell.login          = login;
+  shell.broadcast      = broadcast;
   shell.logout         = logout;
   shell.reload         = reload;
   shell.ui             = {state: UI.getCurrentState, sidebar: UI.getSidebarStatus};
@@ -39,6 +40,11 @@ function ShellCtrl($scope, UI, Auth) {
     Auth.get(); /* load previous user from localStorage */
     shell.user = Auth.getUser(); /* pupulate our local user object */
     isLogged();
+
+    $scope.$on('ChangeName', function(event, data) {
+      shell.user.username = data.username;
+      // console.log('$emit test: %s', data);
+    });
   }
 
 
@@ -50,6 +56,11 @@ function ShellCtrl($scope, UI, Auth) {
       shell.user.authenticated = false;
       UI.error(data)
     })
+  }
+
+  function broadcast() {
+    // console.log('This is $broadcast test!');
+    $scope.$broadcast('LoginEvent', { user: 'kuntau' });
   }
 
   function login() {
@@ -114,6 +125,8 @@ function Auth($q, $http) {
           resolve(data)
         })
         .error(function (error) {
+          localStorage.removeItem(STORAGE_ID);
+          user = {};
           reject(error.error)
         })
     })
@@ -152,8 +165,7 @@ function Auth($q, $http) {
   }
   function get() {
     user = JSON.parse(localStorage.getItem(STORAGE_ID) || '{}');
-    console.log('Auth: ' + JSON.stringify(user));
-    return user;
+    // console.log('Auth: ' + JSON.stringify(user));
   }
   function put(user) {
     localStorage.setItem(STORAGE_ID, JSON.stringify(user))

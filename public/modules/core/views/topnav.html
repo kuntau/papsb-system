@@ -12,7 +12,7 @@
     </div>
 
     <ul class="nav navbar-nav hidden-xs">
-      <li ui-sref-active="active"><a ui-sref="operation"><i class="fa fa-bus"></i>OPERATION</a></li>
+      <li ui-sref-active="active"><a ng-click="shell.broadcast()"><i class="fa fa-bus"></i>OPERATION</a></li>
       <li ui-sref-active="active"><a ui-sref="workshop"><i class="fa fa-wrench"></i>WORKSHOP</a></li>
       <li ui-sref-active="active"><a ui-sref="about"><i class="fa fa-info"></i>ABOUT</a></li>
       <li ui-sref-active="active"><a ui-sref="contact"><i class="fa fa-comment"></i>CONTACT</a></li>
@@ -28,7 +28,7 @@
       <li ng-if="shell.user.authenticated === true" class="dropdown">
         <a id="drop-auth" href="#" class="dropdown-toggle" data-toggle="dropdown">
           <img class="img-circle" ng-src="{{ shell.user.avatar }}" style="max-width: 40px" />
-          <span class="user-info hidden-xs">
+          <span class="user-info hidden-xs hidden-sm">
             <small>Welcome,</small>{{ shell.user.username }}
           </span>&nbsp;
           <i class="fa fa-caret-down"></i>
