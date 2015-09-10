@@ -74,7 +74,7 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
                     return { title: $stateParams.page }
         }},
       data        : {
-        titlex: 'haish'
+        title: 'haish'
       }
     })
 

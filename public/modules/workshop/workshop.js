@@ -3,7 +3,8 @@
 
   angular
     .module('papsb.workshop')
-    .controller('WorkshopCtrl', Workshop);
+    .controller('WorkshopCtrl', Workshop)
+    .controller('OverviewCtrl', Overview);
 
   Workshop.$inject = [ '$scope', 'dataservice' ];
   function Workshop($scope, dataservice) {
@@ -11,9 +12,15 @@
 
     getUsers();
 
+    $scope.$on('LoginEvent', function (event, data) {
+      console.log('On event: %s data: %s', event.name, data.user);
+    });
+
     vm.random = function () {
-      vm.doug.data = [ 20, 10, 1, 3, 5 ];
-      console.log(vm.doug.data);
+      var username = faker.name.firstName();
+      $scope.$emit('ChangeName', { username: username });
+      // vm.doug.data = [ 20, 10, 1, 3, 5 ];
+      // console.log(vm.doug.data);
     }
 
     /* line chart */
@@ -44,5 +51,15 @@
         });
     }
   } //WorkshopCtrl
+
+  Overview.$inject = [ '$scope' ];
+  function Overview($scope) {
+    var vm = this;
+
+    $scope.$on('LoginEvent', function (event, data) {
+      console.log('asfdasdfsadf', event, data);
+    });
+
+  };
 
 })();
