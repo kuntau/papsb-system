@@ -4,7 +4,8 @@
   angular
     .module('papsb.workshop')
     .controller('WorkshopCtrl', Workshop)
-    .controller('OverviewCtrl', Overview);
+    .controller('BusListCtrl', BusList)
+    .controller('PageParamsCtrl', PageParams);
 
   Workshop.$inject = [ '$scope', 'dataservice' ];
   function Workshop($scope, dataservice) {
@@ -52,14 +53,38 @@
     }
   } //WorkshopCtrl
 
-  Overview.$inject = [ '$scope' ];
-  function Overview($scope) {
+  BusList.$inject = [ '$scope' ];
+  function BusList($scope) {
     var vm = this;
 
-    $scope.$on('LoginEvent', function (event, data) {
-      console.log('asfdasdfsadf', event, data);
-    });
+    vm.names = ["Nizam", "Hassan", "Adam", "Burhan"];
+    vm.buses = [
+      { id: 1, plate_no: 'WFJ 7889', depot: 'Putrajaya Sentral', road_tax: '17 Oktober 2015', permit: '25 Oktober 2015' },
+      { id: 1, plate_no: 'WFJ 7889', depot: 'Putrajaya Sentral', road_tax: '17 Oktober 2015', permit: '25 Oktober 2015' },
+      { id: 1, plate_no: 'WFJ 7889', depot: 'Putrajaya Sentral', road_tax: '17 Oktober 2015', permit: '25 Oktober 2015' },
+      { id: 1, plate_no: 'WFJ 7889', depot: 'Putrajaya Sentral', road_tax: '17 Oktober 2015', permit: '25 Oktober 2015' },
+      { id: 1, plate_no: 'WFJ 7889', depot: 'Putrajaya Sentral', road_tax: '17 Oktober 2015', permit: '25 Oktober 2015' },
+      { id: 1, plate_no: 'WFJ 7889', depot: 'Putrajaya Sentral', road_tax: '17 Oktober 2015', permit: '25 Oktober 2015' },
+      { id: 1, plate_no: 'WFJ 7889', depot: 'Putrajaya Sentral', road_tax: '17 Oktober 2015', permit: '25 Oktober 2015' }
+    ];
+  };
 
+  PageParams.$inject = [ '$scope', '$stateParams', 'getTitle' ];
+  function PageParams($scope, $stateParams, getTitle) {
+    var vm = this;
+
+    $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
+    $scope.title = getTitle.title;
+    $scope.page = $stateParams.page;
+
+    var massive = [];
+
+    for (var i = 10 - 1; i >= 0; i--) {
+      var word = 'random useless ' + $scope.page + ' and the couting: ' + i;
+      // toastr.warning(word);
+      massive.push(word)
+    }
+    $scope.massive = massive;
   };
 
 })();

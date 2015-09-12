@@ -31,7 +31,7 @@ function papsbInit ($rootScope, $state, $stateParams, UI) {
 }
 
 function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
-  //$locationProvider.html5Mode(true).hashPrefix('!');
+  // $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider
     .otherwise('/login'); // for any unmatched url, redirect here
 
@@ -51,24 +51,18 @@ function papsbRoute ($stateProvider, $urlRouterProvider, $locationProvider) {
       title       : 'Overview'
     })
 
+    .state('workshop.buslist', {
+      url         : '/buslist',
+      templateUrl : 'modules/workshop/views/workshop.buslist.html',
+      title       : 'Bus List',
+      controller  : 'BusListCtrl as vm'
+    })
+
     .state('workshop.message1', {
       url         : '/:page',
       templateUrl : 'modules/workshop/views/workshop.message1.html',
       title       : 'Message 1',
-      controller  : function ($scope, $stateParams, getTitle) {
-        $scope.names = ["Nizam", "Hassan", "Adam", "Burhan"];
-        $scope.title = getTitle.title;
-        $scope.page = $stateParams.page;
-
-        var massive = [];
-
-        for (var i = 10 - 1; i >= 0; i--) {
-          var word = 'random useless ' + $scope.page + ' and the couting: ' + i;
-          // toastr.warning(word);
-          massive.push(word)
-        }
-        $scope.massive = massive;
-      },
+      controller  : 'PageParamsCtrl as vm',
       resolve     : {
         getTitle : function ($stateParams) {
                     return { title: $stateParams.page }

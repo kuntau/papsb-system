@@ -1,0 +1,26 @@
+<h1 class="page-header">Bus List</h1>
+
+<button class="btn btn-primary"><i class="fa fa-plus"></i> New bus</button>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Plate No</th>
+        <th>Depot</th>
+        <th>Road Tax Expiry</th>
+        <th>Permit Expiry</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="bus in vm.buses">
+        <td>{{ ($index + 1) }}</td>
+        <td>{{ ::bus.plate_no }}</td>
+        <td>{{ ::bus.depot | uppercase }}</td>
+        <td>{{ ::bus.road_tax }}</td>
+        <td>{{ ::bus.permit }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div> <!-- end table responsive -->
