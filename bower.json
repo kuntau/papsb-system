@@ -17,12 +17,12 @@
   ],
   "dependencies": {
     "angular": "^1.4",
-    "angular-animate": "^1.4",
-    "angular-chart.js": "~0.7.6",
+    "angular-animate": "^1.x",
+    "angular-chart.js": "^0.x",
     "angular-toastr": "^1.x",
     "angular-ui-bootstrap-bower": "^0.x",
     "angular-ui-router": "^0.x",
-    "bootstrap": "^3.x",
+    "bootstrap": "^4.x",
     "font-awesome": "^4.x",
     "spin.js": "^2.x"
   },
